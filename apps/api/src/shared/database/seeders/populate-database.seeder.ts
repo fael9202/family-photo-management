@@ -1,16 +1,14 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
-import { lastValueFrom } from 'rxjs';
-import { JsonPlaceHolderUserResponse } from 'src/shared/interfaces/jsonplaceholder/jsonplaceholder.user.interface';
 import { DatabaseService } from 'src/shared/config/database';
+import { JsonPlaceholderService } from 'src/shared/http/jsonPlaceHolder/json-placeholder.service';
 
 @Injectable()
 export class PopulateDatabaseSeeder implements OnModuleInit {
   private readonly logger = new Logger(PopulateDatabaseSeeder.name);
 
   constructor(
-    private readonly httpService: HttpService,
     private readonly databaseService: DatabaseService,
+    private readonly jsonPlaceholderService: JsonPlaceholderService,
   ) {}
 
   async onModuleInit() {
@@ -27,13 +25,7 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
     }
 
     try {
-      // 1. Fetch users
-      const usersResponse = await lastValueFrom(
-        this.httpService.get<JsonPlaceHolderUserResponse>(
-          'https://jsonplaceholder.typicode.com/users',
-        ),
-      );
-      const users = usersResponse.data;
+      const users = await this.jsonPlaceholderService.getUsers();
 
       for (const user of users) {
         // Insert user
@@ -64,12 +56,7 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
         });
 
         // 2. Fetch albums for the user
-        const albumsResponse = await lastValueFrom(
-          this.httpService.get(
-            `https://jsonplaceholder.typicode.com/users/${user.id}/albums`,
-          ),
-        );
-        const albums = albumsResponse.data;
+        const albums = await this.jsonPlaceholderService.getAlbums(user.id);
 
         for (const album of albums) {
           // Insert album
@@ -82,12 +69,7 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
           });
 
           // 3. Fetch photos for the album
-          const photosResponse = await lastValueFrom(
-            this.httpService.get(
-              `https://jsonplaceholder.typicode.com/photos?albumId=${album.id}`,
-            ),
-          );
-          const photos = photosResponse.data;
+          const photos = await this.jsonPlaceholderService.getPhotos(album.id);
 
           for (const photo of photos) {
             // Insert photo
