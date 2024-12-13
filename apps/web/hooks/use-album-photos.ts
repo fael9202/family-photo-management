@@ -7,7 +7,7 @@ export const useAlbumPhotos = ({ paramId }: { paramId: number }) => {
   const [pagination, setPagination] = useState({ pageIndex: 1, pageSize: 10 });
   const { data, error, isLoading } = useQuery({
     queryKey: [
-      `album-photos-${pagination.pageIndex}-${pagination.pageSize}`,
+      `album-photos`,
       { pagination: pagination },
       paramId,
     ],

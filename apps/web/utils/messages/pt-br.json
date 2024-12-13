@@ -60,6 +60,13 @@
     "delete": "Excluir",
     "confirmDelete": "Tem certeza que deseja excluir esta foto?",
     "deleteWarning": "Esta ação é irreversível e removerá a foto permanentemente.",
-    "deleteSuccess": "Foto excluída com sucesso!"
+    "deleteSuccess": "Foto excluída com sucesso!",
+    "editPhoto": {
+      "title": "Editar Foto",
+      "titleLabel": "Novo título",
+      "titlePlaceholder": "Digite o novo título da foto",
+      "save": "Salvar",
+      "cancel": "Cancelar"
+    }
   }
 }

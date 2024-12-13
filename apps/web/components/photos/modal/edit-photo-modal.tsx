@@ -14,75 +14,99 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import messages from "@/utils/messages/pt-br.json";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { editPhotoService } from "@/services/photos/edit-photo";
+import { Loader2 } from "lucide-react";
+
+const editPhotoSchema = z.object({
+  title: z.string().min(3).max(255),
+});
+
+type EditPhotoSchema = z.infer<typeof editPhotoSchema>;
 
 interface EditPhotoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  photo: {
-    id: number;
-    title: string;
-    description: string;
-  };
+  token: string;
+  id: number;
 }
 
 export default function EditPhotoModal({
   isOpen,
   onClose,
-  photo,
+  token,
+  id,
 }: EditPhotoModalProps) {
-  const [title, setTitle] = useState(photo.title);
-  const [description, setDescription] = useState(photo.description);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EditPhotoSchema>({
+    resolver: zodResolver(editPhotoSchema),
+  });
 
-    const response = await fetch(`/api/photos/${photo.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, description }),
-    });
+  const queryClient = useQueryClient();
 
-    if (response.ok) {
+  const mutation = useMutation({
+    mutationKey: ["editPhoto"],
+    mutationFn: (data: { title: string; token: string; id: number }) =>
+      editPhotoService(data),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["album-photos"] });
+      toast.success(
+        data?.message || data?.message || "Foto editada com sucesso"
+      );
       onClose();
       router.refresh();
-    } else {
-      // Handle error
-      console.error("Failed to update photo");
-    }
-  };
+    },
+    onError: () => {
+      toast.error("Erro ao editar foto");
+    },
+  });
 
+  async function handleEditPhoto(data: EditPhotoSchema) {
+    setLoading(true);
+    await mutation.mutateAsync({
+      title: data.title,
+      token,
+      id,
+    });
+    setLoading(false);
+  }
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{messages.photo.edit}</DialogTitle>
+          <DialogTitle>{messages.photo.editPhoto.title}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit(handleEditPhoto)} className="space-y-4">
           <div>
-            <Label htmlFor="title">{messages.photo.title}</Label>
+            <Label htmlFor="title">{messages.photo.editPhoto.titleLabel}</Label>
             <Input
               id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              {...register("title")}
               required
+              placeholder={messages.photo.editPhoto.titlePlaceholder}
             />
           </div>
-          <div>
-            <Label htmlFor="description">{messages.photo.description}</Label>
-            <Textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
+          {errors.title && (
+            <p className="text-red-500">{errors.title.message}</p>
+          )}
           <DialogFooter>
             <Button type="button" variant="outline" onClick={onClose}>
               {messages.common.cancel}
             </Button>
-            <Button type="submit">{messages.common.save}</Button>
+            <Button type="submit" disabled={loading}>
+              {loading ? <Loader2 className="w-4 h-4 mr-2" /> : null}
+              {messages.common.save}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

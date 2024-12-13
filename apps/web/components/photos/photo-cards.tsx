@@ -17,6 +17,7 @@ export default function PhotoCards({
   data,
   userId,
   contact,
+  token,
 }: {
   data: IPhotoAlbum;
   userId: number;
@@ -24,26 +25,37 @@ export default function PhotoCards({
     email: string;
     username: string;
   };
+  token: string;
 }) {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<{
     id: number;
     title: string;
-    description: string;
+    url: string;
+    albumId: number;
+    thumbnailUrl: string;
   } | null>(null);
 
   const handleEditClick = (photo: {
     id: number;
     title: string;
-    description: string;
+    url: string;
+    albumId: number;
+    thumbnailUrl: string;
   }) => {
     setSelectedPhoto(photo);
     setEditModalOpen(true);
   };
 
   const handleDeleteClick = (photoId: number) => {
-    setSelectedPhoto({ id: photoId, title: "", description: "" });
+    setSelectedPhoto({
+      id: photoId,
+      title: "",
+      url: "",
+      albumId: 0,
+      thumbnailUrl: "",
+    });
     setDeleteModalOpen(true);
   };
 
@@ -119,7 +131,8 @@ export default function PhotoCards({
           <EditPhotoModal
             isOpen={editModalOpen}
             onClose={() => setEditModalOpen(false)}
-            photo={selectedPhoto}
+            token={token}
+            id={selectedPhoto.id}
           />
           <DeletePhotoModal
             isOpen={deleteModalOpen}

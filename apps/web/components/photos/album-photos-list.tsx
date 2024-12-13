@@ -45,6 +45,7 @@ export default function AlbumPhotosList({
           email: data?.album.user.email || "",
           username: data?.album.user.username || "",
         }}
+        token={session.token}
       />
       <Pagination
         pagination={pagination}

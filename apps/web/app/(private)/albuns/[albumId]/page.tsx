@@ -13,7 +13,6 @@ export default async function AlbumsPage({
   if (!session) {
     redirect("/");
   }
-
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">
