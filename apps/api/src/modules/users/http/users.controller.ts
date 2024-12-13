@@ -10,8 +10,12 @@ export class UsersController {
   constructor(private readonly sendEmailService: SendEmailService) {}
 
   @Post('send-email')
-  sendEmail(@Body() sendEmailDto: SendEmailDto) {
-    return this.sendEmailService.sendEmail(sendEmailDto);
+  async sendEmail(@Body() sendEmailDto: SendEmailDto) {
+    await this.sendEmailService.sendEmail(sendEmailDto);
+    return {
+      status: true,
+      message: 'Email enviado com sucesso.',
+    };
   }
 
   // @Post()

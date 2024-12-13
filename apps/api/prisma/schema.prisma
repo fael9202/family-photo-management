@@ -20,6 +20,7 @@ model User {
   email    String
   phone    String
   website  String
+  password String
   company  Company?
   address  Address?
   albums   Album[]

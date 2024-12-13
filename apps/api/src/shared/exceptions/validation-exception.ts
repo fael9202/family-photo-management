@@ -1,5 +1,5 @@
 // validation-exception.helper.ts
-import { BadRequestException, HttpStatus } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
 
 export function ValidationException(errors: ValidationError[]) {
@@ -23,9 +23,7 @@ export function ValidationException(errors: ValidationError[]) {
   });
   return new BadRequestException({
     status: false,
-    statusCode: HttpStatus.BAD_REQUEST,
     message: 'Falha de validação',
     errors: result,
-    timestamp: new Date().toISOString(),
   });
 }
