@@ -44,7 +44,12 @@ export class UsersController {
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    return this.loginService.login(loginDto);
+    const data = await this.loginService.login(loginDto);
+    return {
+      status: true,
+      message: 'Usuário autenticado com sucesso.',
+      data,
+    };
   }
 
   // @Post()
