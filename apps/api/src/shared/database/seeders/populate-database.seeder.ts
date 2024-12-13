@@ -60,7 +60,7 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
       data: {
         id: user.id,
         name: user.name,
-        username: user.username,
+        username: user.username.toLocaleLowerCase(),
         email: user.email,
         phone: user.phone,
         website: user.website,

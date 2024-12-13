@@ -19,7 +19,7 @@ export class UserRepository {
 
   async findUserByUsername(username: string) {
     return this.databaseService.user.findFirst({
-      where: { name: username.trim().toLowerCase() },
+      where: { username: username.trim().toLowerCase() },
       select: {
         id: true,
         name: true,

@@ -22,6 +22,13 @@ export class LoginService {
     return { accessToken };
   }
 
+  async validateUserPassword(password: string, actualPassword: string) {
+    const isPasswordValid = await bcrypt.compare(password, actualPassword);
+    if (!isPasswordValid) {
+      throw new CustomError('Senha incorreta.', statusCode.UNAUTHORIZED);
+    }
+  }
+
   async login({ username, password }: LoginDto) {
     verifySpecialChars(username);
     const user = await this.userRepository.findUserByUsername(username);
@@ -30,10 +37,7 @@ export class LoginService {
       throw new CustomError('Usuário não encontrado.', statusCode.UNAUTHORIZED);
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      throw new CustomError('Senha incorreta.', statusCode.UNAUTHORIZED);
-    }
+    await this.validateUserPassword(password, user.password);
 
     const tokenPayload = { id: user.id, name: user.name, email: user.email };
     const { accessToken } = this.generateToken(tokenPayload);
