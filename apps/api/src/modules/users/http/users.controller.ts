@@ -82,7 +82,12 @@ export class UsersController {
     @Param('userId') userId: string,
     @Query() query: UsersQueryDto,
   ) {
-    return await this.findUserAlbumsService.execute(userId, query);
+    const userAlbums = await this.findUserAlbumsService.execute(userId, query);
+    return {
+      status: true,
+      message: 'Álbuns encontrados com sucesso.',
+      data: userAlbums,
+    };
   }
 
   // @Post()

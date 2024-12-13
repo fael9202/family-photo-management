@@ -1,8 +1,9 @@
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { AlbumsEvent } from 'src/shared/utils/enums/events.enum';
 import { UsersQueryDto } from '../dto/users-query.dto';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Album } from '@prisma/client';
+import { UserRepository } from '../../persistence/user.repository';
 
 export interface UserAlbums {
   albums: Album[];
@@ -10,20 +11,37 @@ export interface UserAlbums {
   currentPage: number;
   nextPage: number | null;
   prevPage: number | null;
+  userName?: string;
+  email?: string;
 }
 
 @Injectable()
 export class FindUserAlbumsService {
-  constructor(private eventEmitter: EventEmitter2) {}
+  constructor(
+    private eventEmitter: EventEmitter2,
+    private userRepository: UserRepository,
+  ) {}
 
   async execute(userId: string, query: UsersQueryDto): Promise<UserAlbums> {
+    const user = await this.userRepository.findUserName(Number(userId));
+
+    if (!user) {
+      throw new HttpException(
+        { status: false, message: 'Usuário não encontrado.' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
     const [userAlbums]: UserAlbums[] = await this.eventEmitter.emitAsync(
       AlbumsEvent.findAlbumsByUserId,
       userId,
       query,
     );
-    console.log('userAlbums', userAlbums);
 
-    return userAlbums;
+    return {
+      ...userAlbums,
+      userName: user.username,
+      email: user.email,
+    };
   }
 }

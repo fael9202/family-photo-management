@@ -55,7 +55,7 @@ export default function LoginForm(): JSX.Element {
     );
     if (result?.status && result.status === 200) {
       toast.success("Login efetuado com sucesso");
-      router.push("/home");
+      router.push("/albuns");
     } else {
       if (result?.error) {
         toast.error(result.error); // Mostra a mensagem de erro do backend

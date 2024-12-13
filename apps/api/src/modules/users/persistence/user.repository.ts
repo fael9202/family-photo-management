@@ -33,7 +33,6 @@ export class UserRepository {
     });
   }
 
-  //faça um omit para o password na tipagem do retorno
   async findAll(
     page: number,
     pageSize: number,
@@ -57,5 +56,18 @@ export class UserRepository {
 
   async getAllUsersCount(): Promise<number> {
     return this.databaseService.user.count();
+  }
+
+  async findUserName(
+    userId: number,
+  ): Promise<{ username: string; email: string }> {
+    const user = await this.databaseService.user.findUnique({
+      where: { id: userId },
+      select: { username: true, email: true },
+    });
+    return {
+      username: user?.username || '',
+      email: user?.email || '',
+    };
   }
 }

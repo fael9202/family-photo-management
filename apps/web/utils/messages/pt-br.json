@@ -15,8 +15,12 @@
     "usernameRequired": "Nome de usuário é obrigatório"
   },
   "albums": {
+    "contact": "Contato",
+    "username": "Nome de usuário",
+    "email": "Email",
+    "title": "Título",
     "viewPhotos": "Ver Fotos",
-    "yourAlbum": "Seu Álbum",
+    "yourAlbum": "Este álbum pertence a você !",
     "noAlbums": "Nenhum álbum encontrado",
     "noAlbumsDescription": "Este usuário ainda não criou nenhum álbum.",
     "loading": "Carregando álbuns..."
@@ -34,5 +38,9 @@
       },
       "viewAlbums": "Ver Álbuns"
     }
+  },
+  "userAlbums": {
+    "youAreViewing": "você está visualizando os álbuns do usuário",
+    "youAreViewingCurrentUser": "você está visualizando seus próprios álbuns"
   }
 }

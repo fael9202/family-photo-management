@@ -49,9 +49,9 @@ export default function UserList() {
                 <TableCell>{user.username}</TableCell>
                 <TableCell>
                   <Link
-                    href={`/users/${user.id}/albums`}
+                    href={`/usuarios/${user.id}/albuns`}
                     className="text-blue-500 hover:underline"
-                  >z
+                  >
                     {messages.users.table.viewAlbums}
                   </Link>
                 </TableCell>

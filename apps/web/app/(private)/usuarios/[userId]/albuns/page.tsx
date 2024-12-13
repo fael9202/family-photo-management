@@ -1,9 +1,13 @@
-import UserList from "@/components/users/users-list";
+import UserAlbumList from "@/components/albums/user-album-list";
 import { authOptions } from "@/server/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export default async function UsersPage() {
+export default async function UserAlbumsPage({
+  params,
+}: {
+  params: { userId: string };
+}) {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/");
@@ -11,8 +15,10 @@ export default async function UsersPage() {
 
   return (
     <div>
-      <p className="mb-4">{session.user?.email}</p>
-      <UserList />
+      <UserAlbumList
+        session={session}
+        paramId={Number(params.userId)}
+      />
     </div>
   );
 }
