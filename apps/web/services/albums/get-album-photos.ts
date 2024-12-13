@@ -1,4 +1,4 @@
-import { IAlbumsResponse } from "@/utils/interfaces/albums.interface";
+import { IPhotoAlbum } from "@/utils/interfaces/photo-albums.interface";
 
 import axios from "axios";
 
@@ -8,9 +8,9 @@ export async function GetAlbumPhotosService(
     pageSize: number;
   },
   albumId: number
-): Promise<IAlbumsResponse> {
+): Promise<IPhotoAlbum> {
   const baseUrl =
-    `${process.env.NEXT_PUBLIC_API_URL}/albums/${albumId}/photos?page=${pagination.pageIndex}` +
+    `${process.env.NEXT_PUBLIC_API_URL}/albums/${albumId}?page=${pagination.pageIndex}` +
     `${pagination.pageSize ? "&pageSize=" + pagination.pageSize : ""}`;
   const response = await axios.get(baseUrl, {
     headers: {},

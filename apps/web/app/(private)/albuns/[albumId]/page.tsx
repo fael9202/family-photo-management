@@ -2,7 +2,7 @@ import { authOptions } from "@/server/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import messages from "@/utils/messages/pt-br.json";
-import AllAlbums from "@/components/albums/all-albums";
+import AlbumPhotosList from "@/components/photos/album-photos-list";
 
 export default async function AlbumsPage({
   params,
@@ -19,8 +19,7 @@ export default async function AlbumsPage({
       <h1 className="text-3xl font-bold mb-4">
         {messages.common.welcome}, {session.user?.username}
       </h1>
-      <p className="mb-4">{session.user?.email}</p>
-      <AllAlbums userId={session.user?.id} />
+      <AlbumPhotosList session={session} paramId={Number(params.albumId)} />
     </div>
   );
 }

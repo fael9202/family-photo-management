@@ -43,7 +43,7 @@ export default function AlbumCards({
             {hoveredAlbum === album.id.toString() && (
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                 <Link
-                  href={`/albums/${album.id}`}
+                  href={`/albuns/${album.id}`}
                   className="text-white hover:underline font-medium"
                 >
                   {messages.albums.viewPhotos}

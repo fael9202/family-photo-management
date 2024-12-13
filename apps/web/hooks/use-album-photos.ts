@@ -1,5 +1,5 @@
 "use client";
-import { GetUserAlbumsService } from "@/services/users/get-user-albums";
+import { GetAlbumPhotosService } from "@/services/albums/get-album-photos";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 

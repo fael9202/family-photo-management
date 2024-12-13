@@ -1,11 +1,11 @@
 "use client";
-import AlbumSkeleton from "./album-skeleton";
-import AlbumNotFound from "./album-not-found";
 import Pagination from "../ui/pagination";
-import AlbumCards from "./album-cards";
-import { useUserAlbums } from "@/hooks/use-user-albums";
+import AlbumCards from "./photo-cards";
 import messages from "@/utils/messages/pt-br.json";
 import { Session } from "next-auth";
+import { useAlbumPhotos } from "@/hooks/use-album-photos";
+import AlbumPhotosSkeleton from "./album-photos-skeleton";
+import AlbumPhotoNotFound from "./album-photo-not-found";
 
 export default function AlbumPhotosList({
   session,
@@ -14,22 +14,22 @@ export default function AlbumPhotosList({
   session: Session;
   paramId: number;
 }) {
-  const { data, isLoading, pagination, setPagination } = useUserAlbums({
+  const { data, isLoading, pagination, setPagination } = useAlbumPhotos({
     paramId,
   });
   if (isLoading) {
-    return <AlbumSkeleton />;
+    return <AlbumPhotosSkeleton />;
   }
 
-  if (!data || data.albums.length === 0) {
-    return <AlbumNotFound />;
+  if (!data || data.photos.length === 0) {
+    return <AlbumPhotoNotFound />;
   }
 
   function verifyIsCurrentUser() {
-    if (data?.userName === session.user?.username) {
-      return `${data?.userName} ${messages.userAlbums.youAreViewingCurrentUser}`;
+    if (data?.album.user.username === session.user?.username) {
+      return `${data?.album.user.username} ${messages.photo.youAreViewingCurrentUser} ${messages.photo.fromAlbum}: ${data?.album.title}`;
     }
-    return `${session.user?.username} ${messages.userAlbums.youAreViewing} ${data?.userName}`;
+    return `${session.user?.username} ${messages.photo.youAreViewing} ${data?.album.user.username} ${messages.photo.fromAlbum}: ${data?.album.title}`;
   }
 
   return (
@@ -42,8 +42,8 @@ export default function AlbumPhotosList({
         data={data}
         userId={Number(session.user?.id)}
         contact={{
-          email: data?.email || "",
-          username: data?.userName || "",
+          email: data?.album.user.email || "",
+          username: data?.album.user.username || "",
         }}
       />
       <Pagination

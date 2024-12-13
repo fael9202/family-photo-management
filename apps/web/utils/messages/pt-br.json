@@ -1,6 +1,9 @@
 {
   "common": {
-    "welcome": "Bem-Vindo"
+    "welcome": "Bem-Vindo",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir"
   },
   "login": {
     "title": "Login",
@@ -42,5 +45,21 @@
   "userAlbums": {
     "youAreViewing": "você está visualizando os álbuns do usuário",
     "youAreViewingCurrentUser": "você está visualizando seus próprios álbuns"
+  },
+  "photo": {
+    "contact": "Contato",
+    "username": "Nome de usuário",
+    "email": "Email",
+    "title": "Título",
+    "description": "Nenhuma foto encontrada para este álbum.",
+    "yourPhoto": "Esta foto pertence a você !",
+    "youAreViewing": "você está visualizando as fotos do usuário",
+    "youAreViewingCurrentUser": "você está visualizando suas próprias fotos",
+    "fromAlbum": "do álbum",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "confirmDelete": "Tem certeza que deseja excluir esta foto?",
+    "deleteWarning": "Esta ação é irreversível e removerá a foto permanentemente.",
+    "deleteSuccess": "Foto excluída com sucesso!"
   }
 }
