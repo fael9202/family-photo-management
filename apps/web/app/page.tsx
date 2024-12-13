@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "next-auth/react";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
-
+import messages from "@/utils/messages/pt-br.json";
 const loginSchema = z.object({
   username: z.string().toLowerCase(),
   password: z.string().min(1),
@@ -55,7 +55,7 @@ export default function LoginForm(): JSX.Element {
     );
     if (result?.status && result.status === 200) {
       toast.success("Login efetuado com sucesso");
-      router.replace("home");
+      router.push("/home");
     } else {
       if (result?.error) {
         toast.error(result.error); // Mostra a mensagem de erro do backend
@@ -70,14 +70,12 @@ export default function LoginForm(): JSX.Element {
       <Card className="max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Digite seu nome de usuário abaixo para acessar sua conta
-          </CardDescription>
+          <CardDescription>{messages.login.description}</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="grid gap-4" onSubmit={handleSubmit(handleLogin)}>
             <div className="grid gap-2">
-              <Label htmlFor="username">Nome de usuário</Label>
+              <Label htmlFor="username">{messages.login.username}</Label>
               <Input
                 id="username"
                 type="text"
@@ -88,17 +86,17 @@ export default function LoginForm(): JSX.Element {
             </div>
             {errors.username && (
               <p className="text-red-500 text-sm">
-                Nome de usuário é obrigatório
+                {messages.login.usernameRequired}
               </p>
             )}
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password">Senha</Label>
+                <Label htmlFor="password">{messages.login.password}</Label>
                 <Link
                   href="/solicitar-nova-senha"
                   className="ml-auto inline-block text-sm underline"
                 >
-                  Esqueceu sua senha?
+                  {messages.login.forgotPassword}
                 </Link>
               </div>
               <div className="relative">
@@ -121,16 +119,18 @@ export default function LoginForm(): JSX.Element {
               </div>
             </div>
             {errors.password && (
-              <p className="text-red-500 text-sm">Senha é obrigatória</p>
+              <p className="text-red-500 text-sm">
+                {messages.login.passwordRequired}
+              </p>
             )}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Carregando..." : "Entrar"}
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
-            Não possui uma conta?{" "}
+            {messages.login.noAccount} {" "}
             <Link href="" className="underline">
-              Criar conta
+              {messages.login.createAccount}
             </Link>
           </div>
         </CardContent>

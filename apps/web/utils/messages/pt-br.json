@@ -1,0 +1,17 @@
+{
+  "common": {
+    "welcome": "Bem-Vindo"
+  },
+  "login": {
+    "title": "Login",
+    "description": "Digite seu nome de usuário abaixo para acessar sua conta",
+    "username": "Nome de usuário",
+    "password": "Senha",
+    "forgotPassword": "Esqueceu sua senha?",
+    "forgotPasswordLink": "Solicitar nova senha",
+    "noAccount": "Não possui uma conta?",
+    "createAccount": "Criar conta",
+    "passwordRequired": "Senha é obrigatória",
+    "usernameRequired": "Nome de usuário é obrigatório"
+  }
+}

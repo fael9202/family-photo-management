@@ -1,8 +1,8 @@
 import AlbumList from "@/components/albums/album-list";
 import { authOptions } from "@/server/auth";
 import { getServerSession } from "next-auth";
-import { notFound, redirect } from "next/navigation";
-
+import { redirect } from "next/navigation";
+import messages from "@/utils/messages/pt-br.json";
 async function getUser(userId) {
   // This would be replaced with an actual API call
   const users = [
@@ -32,7 +32,7 @@ export default async function UserAlbums() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">
-        {session.user?.username}'s Albums
+        {messages.common.welcome}, {session.user?.username}
       </h1>
       <p className="mb-4">{session.user?.email}</p>
       <AlbumList albums={albums} userId={session.user?.id} />

@@ -41,7 +41,7 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
           if (authData) {
-            return authData.data;
+            return authData;
           }
           return null;
         } catch (err) {
