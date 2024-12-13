@@ -1,7 +1,7 @@
 import {
   EmailNotificationInterface,
   EmailNotificatorStrategy,
-} from 'src/shared/interfaces/notifications/notification.interface';
+} from 'src/shared/utils/interfaces/notifications/notification.interface';
 import { Notification } from '../Notification';
 
 export class EmailNotification extends Notification {

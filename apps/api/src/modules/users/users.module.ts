@@ -7,6 +7,7 @@ import { EmailNotificationEmitter } from './core/events/email-notification-emitt
 import { ChangePasswordService } from './core/services/change-password.service';
 import { UserRepository } from './persistence/user.repository';
 import { JwtService } from '@nestjs/jwt';
+import { LoginService } from './core/services/login.service';
 
 @Module({
   imports: [NotificationModule],
@@ -15,6 +16,7 @@ import { JwtService } from '@nestjs/jwt';
     UsersService,
     SendEmailService,
     ChangePasswordService,
+    LoginService,
     UserRepository,
     EmailNotificationEmitter,
     JwtService,

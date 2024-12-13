@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { RedisConfigModule, RedisConfigService } from '../redis';
 import { QueueConfigService } from './config.service';
 import { NotificationQueueModule } from 'src/shared/notification/jobs';
-import { NotificationQueues } from 'src/shared/enums/events.enum';
+import { NotificationQueues } from 'src/shared/utils/enums/events.enum';
 
 @Module({
   imports: [

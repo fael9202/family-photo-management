@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
-import { JsonPlaceHolderUserResponse } from '../../interfaces/jsonplaceholder/jsonplaceholder.user.interface';
-import { JsonPlaceHolderAlbumResponse } from '../../interfaces/jsonplaceholder/jsonplaceholder.albums.interface';
-import { JsonPlaceHolderPhotoResponse } from '../../interfaces/jsonplaceholder/jsonplaceholder.photo.interface';
+import { JsonPlaceHolderUserResponse } from '../../utils/interfaces/jsonplaceholder/jsonplaceholder.user.interface';
+import { JsonPlaceHolderAlbumResponse } from '../../utils/interfaces/jsonplaceholder/jsonplaceholder.albums.interface';
+import { JsonPlaceHolderPhotoResponse } from '../../utils/interfaces/jsonplaceholder/jsonplaceholder.photo.interface';
 
 @Injectable()
 export class JsonPlaceholderService {

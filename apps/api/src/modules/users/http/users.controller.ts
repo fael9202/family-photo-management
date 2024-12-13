@@ -1,8 +1,13 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { SendEmailDto } from '../core/dto/send-email.dto';
 import { SendEmailService } from '../core/services/send-email.service';
 import { ChangePasswordDto } from '../core/dto/change.dto';
 import { ChangePasswordService } from '../core/services/change-password.service';
+import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { GetUser } from 'src/shared/decorators/user.decorator';
+import { IUserGuard } from 'src/shared/utils/interfaces/user/user-guard.interface';
+import { LoginDto } from '../core/dto/login.dto';
+import { LoginService } from '../core/services/login.service';
 // import { UsersService } from './users.service';
 // import { CreateUserDto } from './dto/create-user.dto';
 // import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,6 +17,7 @@ export class UsersController {
   constructor(
     private readonly sendEmailService: SendEmailService,
     private readonly changePasswordService: ChangePasswordService,
+    private readonly loginService: LoginService,
   ) {}
 
   @Post('send-email')
@@ -23,13 +29,22 @@ export class UsersController {
     };
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('change-password')
-  async changePassword(@Body() changePasswordDto: ChangePasswordDto) {
-    await this.changePasswordService.changePassword(changePasswordDto);
+  async changePassword(
+    @Body() changePasswordDto: ChangePasswordDto,
+    @GetUser() user: IUserGuard,
+  ) {
+    await this.changePasswordService.changePassword(changePasswordDto, user);
     return {
       status: true,
       message: 'Senha alterada com sucesso.',
     };
+  }
+
+  @Post('login')
+  async login(@Body() loginDto: LoginDto) {
+    return this.loginService.login(loginDto);
   }
 
   // @Post()

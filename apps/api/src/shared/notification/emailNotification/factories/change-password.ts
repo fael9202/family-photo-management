@@ -1,4 +1,4 @@
-import { MessageFactory } from 'src/shared/interfaces/notifications/notification.interface';
+import { MessageFactory } from 'src/shared/utils/interfaces/notifications/notification.interface';
 
 export class ChangePasswordEmailMessage implements MessageFactory {
   private token: string;

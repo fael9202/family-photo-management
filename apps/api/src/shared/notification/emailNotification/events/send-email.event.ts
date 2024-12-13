@@ -1,4 +1,4 @@
-import { EmailSender } from 'src/shared/interfaces/notifications/notification.interface';
+import { EmailSender } from 'src/shared/utils/interfaces/notifications/notification.interface';
 
 export class SendEmailEvent {
   public payload: EmailSender;

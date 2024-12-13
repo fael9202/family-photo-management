@@ -3,9 +3,9 @@ import { Album, Photo, User } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 import { DatabaseService } from 'src/shared/config/database';
 import { JsonPlaceholderService } from 'src/shared/http/jsonPlaceHolder/json-placeholder.service';
-import { JsonPlaceHolderAlbum } from 'src/shared/interfaces/jsonplaceholder/jsonplaceholder.albums.interface';
-import { JsonPlaceHolderPhoto } from 'src/shared/interfaces/jsonplaceholder/jsonplaceholder.photo.interface';
-import { JsonPlaceholderUser } from 'src/shared/interfaces/jsonplaceholder/jsonplaceholder.user.interface';
+import { JsonPlaceHolderAlbum } from 'src/shared/utils/interfaces/jsonplaceholder/jsonplaceholder.albums.interface';
+import { JsonPlaceHolderPhoto } from 'src/shared/utils/interfaces/jsonplaceholder/jsonplaceholder.photo.interface';
+import { JsonPlaceholderUser } from 'src/shared/utils/interfaces/jsonplaceholder/jsonplaceholder.user.interface';
 
 @Injectable()
 export class PopulateDatabaseSeeder implements OnModuleInit {

@@ -2,7 +2,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { NotificationEmitter } from '../../../../shared/notification/NotificationEmitter';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { SendEmailEvent } from '../../../../shared/notification/emailNotification/events/send-email.event';
-import { EmailEvent } from 'src/shared/enums/events.enum';
+import { EmailEvent } from 'src/shared/utils/enums/events.enum';
 
 @Injectable()
 export class EmailNotificationEmitter extends NotificationEmitter<

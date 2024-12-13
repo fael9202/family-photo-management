@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
-import { ValidationException } from './shared/exceptions';
+import CustomValidationPipe from './shared/utils/exceptions/validation-exception';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -9,14 +8,8 @@ async function bootstrap() {
   });
 
   // Pipes
-  app.useGlobalPipes(
-    new ValidationPipe({
-      exceptionFactory: ValidationException,
-      stopAtFirstError: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  );
+  app.useGlobalPipes(CustomValidationPipe);
+
   await app.listen(4000);
 }
 bootstrap();

@@ -1,4 +1,4 @@
-import { MessageFactory } from '../interfaces/notifications/notification.interface';
+import { MessageFactory } from '../utils/interfaces/notifications/notification.interface';
 
 interface NotificationInterface {
   messageFactory: MessageFactory;
