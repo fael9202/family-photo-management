@@ -10,13 +10,13 @@ export class ChangePasswordService {
   constructor(private userRepository: UserRepository) {}
 
   async changePassword(changePasswordDto: ChangePasswordDto, user: IUserGuard) {
-    if (changePasswordDto.password !== changePasswordDto.password) {
+    if (changePasswordDto.password !== changePasswordDto.passwordConfirmation) {
       throw new HttpException(
         { status: false, message: 'As senhas não são iguais.' },
         HttpStatus.BAD_REQUEST,
       );
     }
-
+    console.log('user', user);
     const newPassword = await bcrypt.hash(changePasswordDto.password, 10);
     await this.saveNewPassword(user, newPassword);
   }

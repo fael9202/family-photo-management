@@ -34,22 +34,18 @@ export const authOptions: NextAuthOptions = {
             }
           );
           const authData = await response.json();
-          console.log(authData);
           if (!response.ok) {
-            console.log("entrou no !reposnse");
             throw new Error(authData.message || "Erro ao fazer login");
           }
           if (!authData.data.token || !authData.data.user) {
-            console.log("entrou no !authData");
             return null;
           }
           if (authData) {
             return authData;
           }
           return null;
-        } catch (err: any) {
-          console.log("entrou no catch");
-          throw new Error(err.message || "Erro ao fazer login");
+        } catch (err) {
+          throw new Error(err?.message || "Erro ao fazer login");
         }
       },
     }),

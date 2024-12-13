@@ -24,6 +24,7 @@ const CustomValidationPipe = new ValidationPipe({
     });
 
     return new BadRequestException({
+      status: false,
       message: 'Erro na validaçao dos dados',
       errors: formattedErrors,
     });

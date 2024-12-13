@@ -7,7 +7,11 @@ export class UserRepository {
   constructor(private databaseService: DatabaseService) {}
 
   async findFirst(): Promise<User | null> {
-    return this.databaseService.user.findFirst();
+    return this.databaseService.user.findFirst({
+      where: {
+        id: 1,
+      },
+    });
   }
 
   async updatePassword(id: number, password: string): Promise<User> {

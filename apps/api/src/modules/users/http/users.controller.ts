@@ -20,7 +20,7 @@ export class UsersController {
     private readonly loginService: LoginService,
   ) {}
 
-  @Post('send-email')
+  @Post('request-new-password')
   async sendEmail(@Body() sendEmailDto: SendEmailDto) {
     await this.sendEmailService.sendEmail(sendEmailDto);
     return {

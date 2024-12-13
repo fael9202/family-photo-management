@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 
@@ -130,10 +129,7 @@ export default function LoginForm(): JSX.Element {
           </form>
           <div className="mt-4 text-center text-sm">
             Não possui uma conta?{" "}
-            <Link
-              href=""
-              className="underline"
-            >
+            <Link href="" className="underline">
               Criar conta
             </Link>
           </div>

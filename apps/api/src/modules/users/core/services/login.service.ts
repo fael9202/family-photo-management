@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from '../dto/login.dto';
+import CustomError from 'src/shared/utils/exceptions/custom-error';
 import statusCode from 'src/shared/utils/exceptions/statusCode';
 import * as bcrypt from 'bcryptjs';
 import { verifySpecialChars } from 'src/shared/utils/helpers/verifySpecialChars';
 import { UserRepository } from '../../persistence/user.repository';
-import { ErrorException } from 'src/shared/utils/exceptions/error-exception';
 
 @Injectable()
 export class LoginService {
@@ -25,10 +25,7 @@ export class LoginService {
   async validateUserPassword(password: string, actualPassword: string) {
     const isPasswordValid = await bcrypt.compare(password, actualPassword);
     if (!isPasswordValid) {
-      throw new ErrorException({
-        message: 'Senha incorreta.',
-        statusCode: statusCode.UNAUTHORIZED,
-      });
+      throw new CustomError('Senha incorreta.', statusCode.UNAUTHORIZED);
     }
   }
 
@@ -37,10 +34,7 @@ export class LoginService {
     const user = await this.userRepository.findUserByUsername(username);
 
     if (!user) {
-      throw new ErrorException({
-        message: 'Usuário não encontrado.',
-        statusCode: statusCode.UNAUTHORIZED,
-      });
+      throw new CustomError('Usuário não encontrado.', statusCode.UNAUTHORIZED);
     }
 
     await this.validateUserPassword(password, user.password);
@@ -52,6 +46,7 @@ export class LoginService {
       user: {
         name: user.name,
         email: user.email,
+        username: username,
       },
       token: accessToken,
     };
