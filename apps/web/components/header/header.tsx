@@ -11,14 +11,15 @@ import { signOut } from "next-auth/react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
-
+import { Session } from "next-auth";
 const inter = Inter({ subsets: ["latin"] });
 
 interface HeaderProps {
   children: ReactNode;
+  session: Session;
 }
 
-export default function Header({ children }: HeaderProps) {
+export default function Header({ children, session }: HeaderProps) {
   const pathname = usePathname();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -92,6 +93,9 @@ export default function Header({ children }: HeaderProps) {
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
+                <p className="text-sm text-foreground mr-2">
+                  {session.user?.email} /
+                </p>
                 <button
                   onClick={handleLogout}
                   className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-foreground bg-background hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"

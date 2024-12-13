@@ -16,7 +16,7 @@ export default async function PrivateLayout({ children }: PrivateLayoutProps) {
     return redirect("/");
   }
   return (
-    <Header>
+    <Header session={session}>
       {children}
       <Toaster />
     </Header>

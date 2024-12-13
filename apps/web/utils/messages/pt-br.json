@@ -47,6 +47,7 @@
     "youAreViewingCurrentUser": "você está visualizando seus próprios álbuns"
   },
   "photo": {
+    "add": "Adicionar Foto",
     "contact": "Contato",
     "username": "Nome de usuário",
     "email": "Email",
@@ -63,6 +64,13 @@
     "deleteSuccess": "Foto excluída com sucesso!",
     "editPhoto": {
       "title": "Editar Foto",
+      "titleLabel": "Novo título",
+      "titlePlaceholder": "Digite o novo título da foto",
+      "save": "Salvar",
+      "cancel": "Cancelar"
+    },
+    "addPhoto": {
+      "title": "Adicionar Foto",
       "titleLabel": "Novo título",
       "titlePlaceholder": "Digite o novo título da foto",
       "save": "Salvar",
