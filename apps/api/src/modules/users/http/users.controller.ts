@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, HttpCode } from '@nestjs/common';
 import { SendEmailDto } from '../core/dto/send-email.dto';
 import { SendEmailService } from '../core/services/send-email.service';
 import { ChangePasswordDto } from '../core/dto/change.dto';
@@ -43,6 +43,7 @@ export class UsersController {
   }
 
   @Post('login')
+  @HttpCode(200)
   async login(@Body() loginDto: LoginDto) {
     const data = await this.loginService.login(loginDto);
     return {
