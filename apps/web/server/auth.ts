@@ -41,7 +41,7 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
           if (authData) {
-            return authData;
+            return authData.data;
           }
           return null;
         } catch (err) {
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       session = token.user as any;
-      return session;
+      return session.data;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
