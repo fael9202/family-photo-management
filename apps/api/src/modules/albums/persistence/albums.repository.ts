@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Album } from '@prisma/client';
 import { DatabaseService } from 'src/shared/config/database';
+import { CreateAlbumDto } from '../core/dto/create-album.dto';
+import { UpdateAlbumDto } from '../core/dto/update-album.dto';
 
 @Injectable()
 export class AlbumRepository {
@@ -46,6 +48,7 @@ export class AlbumRepository {
     user: {
       username: string;
       email: string;
+      id: number;
     };
   } | null> {
     return this.databaseService.album.findUnique({
@@ -59,9 +62,39 @@ export class AlbumRepository {
           select: {
             username: true,
             email: true,
+            id: true,
           },
         },
       },
+    });
+  }
+
+  async findByTitle(title: string): Promise<Album | null> {
+    // O certo seria usar o findUnique, porem como a api do jsonplaceholder pode retornar mais de um album com o mesmo titulo, usei o findFirst
+    return this.databaseService.album.findFirst({
+      where: { title },
+    });
+  }
+
+  async create(createAlbumDto: CreateAlbumDto, userId: number): Promise<Album> {
+    return this.databaseService.album.create({
+      data: {
+        ...createAlbumDto,
+        userId,
+      },
+    });
+  }
+
+  async update(id: number, updateAlbumDto: UpdateAlbumDto): Promise<Album> {
+    return this.databaseService.album.update({
+      where: { id },
+      data: updateAlbumDto,
+    });
+  }
+
+  async delete(id: number): Promise<Album> {
+    return this.databaseService.album.delete({
+      where: { id },
     });
   }
 }
