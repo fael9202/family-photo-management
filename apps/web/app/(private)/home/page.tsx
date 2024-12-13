@@ -27,7 +27,6 @@ export default async function UserAlbums() {
     redirect("/");
   }
 
-  const albums = await getAlbums(session.user?.id);
 
   return (
     <div>
@@ -35,7 +34,7 @@ export default async function UserAlbums() {
         {messages.common.welcome}, {session.user?.username}
       </h1>
       <p className="mb-4">{session.user?.email}</p>
-      <AlbumList albums={albums} userId={session.user?.id} />
+      <AlbumList userId={session.user?.id} />
     </div>
   );
 }

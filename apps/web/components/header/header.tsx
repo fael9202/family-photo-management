@@ -8,6 +8,9 @@ import { usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "../ui/button";
+import { Menu } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,9 +42,38 @@ export default function Header({ children }: HeaderProps) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center">
-                <div className="flex-shrink-0 flex items-center">
-                  <span className="text-2xl font-bold">Photo App</span>
-                </div>
+                <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+                  <SheetTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="shrink-0 md:hidden"
+                      onClick={() => setIsSheetOpen(true)}
+                    >
+                      <Menu className="h-5 w-5" />
+                      <span className="sr-only">Toggle navigation menu</span>
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left">
+                    <nav className="flex-1 grid gap-6 text-lg font-medium sm:space-x-8">
+                      {HeaderConfig.map((item) => (
+                        <Link
+                          href={item.href}
+                          key={item.label}
+                          onClick={() => handleMenuItemClick(item.href)}
+                          className={`transition-colors ${
+                            isActive(item.href)
+                              ? "text-foreground"
+                              : "text-muted-foreground"
+                          } hover:text-foreground`}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </nav>
+                  </SheetContent>
+                </Sheet>
+
                 <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
                   {HeaderConfig.map((item) => (
                     <Link
@@ -70,6 +102,7 @@ export default function Header({ children }: HeaderProps) {
             </div>
           </div>
         </nav>
+
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {children}
         </main>
