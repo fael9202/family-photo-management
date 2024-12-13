@@ -12,6 +12,11 @@ export interface IAlbum {
   id: number;
   title: string;
   userId: number;
+  user: {
+    username: string;
+    email: string;
+    id: number;
+  };
 }
 
 

@@ -18,15 +18,10 @@ import DeleteAlbumModal from "./modal/delete-album-modal";
 export default function AlbumCards({
   data,
   userId,
-  contact,
   token,
 }: {
   data: IAlbumsResponse;
   userId: number;
-  contact?: {
-    email: string;
-    username: string;
-  };
   token: string;
 }) {
   const [hoveredAlbum, setHoveredAlbum] = useState<string | null>(null);
@@ -44,6 +39,11 @@ export default function AlbumCards({
       id: albumId,
       title: "",
       userId: 0,
+      user: {
+        username: "",
+        email: "",
+        id: 0,
+      },
     });
     setDeleteModalOpen(true);
   };
@@ -89,13 +89,13 @@ export default function AlbumCards({
                     <h2 className="text-sm font-extrabold">
                       {messages.albums.contact}:
                     </h2>
-                    {contact && (
+                    {album.user && (
                       <div className="flex flex-col">
                         <p className="text-sm">
-                          {messages.albums.username}: {contact.username}
+                          {messages.albums.username}: {album.user.username}
                         </p>
                         <p className="text-sm">
-                          {messages.albums.email}: {contact.email}
+                          {messages.albums.email}: {album.user.email}
                         </p>
                       </div>
                     )}

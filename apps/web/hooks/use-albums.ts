@@ -2,8 +2,8 @@
 import { AlbumsService } from "@/services/albums/get-all-albums";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-
-export const useAlbums = () => {
+import { Session } from "next-auth";
+export const useAlbums = (session: Session) => {
   const [pagination, setPagination] = useState({ pageIndex: 1, pageSize: 10 });
   const { data, error, isLoading } = useQuery({
     queryKey: [
@@ -11,7 +11,7 @@ export const useAlbums = () => {
       { pagination: pagination },
     ],
     queryFn: async () => {
-      return AlbumsService(pagination);
+      return AlbumsService(pagination, session.token);
     },
   });
 

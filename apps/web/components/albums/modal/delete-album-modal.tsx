@@ -16,6 +16,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import { deleteAlbumService } from "@/services/albums/delete-album";
+import { ApiError } from "@/utils/interfaces/api-response.interface";
 
 interface DeleteAlbumModalProps {
   isOpen: boolean;
@@ -47,8 +48,9 @@ export default function DeleteAlbumModal({
       onClose();
       router.refresh();
     },
-    onError: () => {
-      toast.error("Erro ao excluir foto");
+    onError: (error: ApiError) => {
+      setLoading(false);
+      toast.error(error.response?.data?.message);
     },
   });
 

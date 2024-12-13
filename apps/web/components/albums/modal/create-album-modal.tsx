@@ -20,6 +20,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import { addAlbumService } from "@/services/albums/create-album";
+import { ApiError } from "@/utils/interfaces/api-response.interface";
 
 const addAlbumSchema = z.object({
   title: z.string().min(3).max(255),
@@ -63,8 +64,9 @@ export default function AddAlbumModal({
       onClose();
       router.refresh();
     },
-    onError: () => {
-      toast.error("Erro ao adicionar álbum");
+    onError: (error: ApiError) => {
+      setLoading(false);
+      toast.error(error.response?.data?.message);
     },
   });
 

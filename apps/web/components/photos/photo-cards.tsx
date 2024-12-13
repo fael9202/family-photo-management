@@ -12,20 +12,18 @@ import messages from "@/utils/messages/pt-br.json";
 import { IPhotoAlbum } from "@/utils/interfaces/photo-albums.interface";
 import EditPhotoModal from "./modal/edit-photo-modal";
 import DeletePhotoModal from "./modal/delete-photo-modal";
-
+import { Session } from "next-auth";
 export default function PhotoCards({
   data,
-  userId,
   contact,
-  token,
+  session,
 }: {
   data: IPhotoAlbum;
-  userId: number;
-  contact?: {
+  contact: {
     email: string;
     username: string;
   };
-  token: string;
+  session: Session;
 }) {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -84,7 +82,7 @@ export default function PhotoCards({
               </h2>
               <CardTitle className="line-clamp-1">{photo.title}</CardTitle>
               <CardDescription>
-                {photo.albumId === userId ? (
+                {session.user?.username === contact.username ? (
                   <span className="ml-2 text-primary">
                     {messages.photo.yourPhoto}
                   </span>
@@ -106,7 +104,7 @@ export default function PhotoCards({
                   </div>
                 )}
               </CardDescription>
-              {photo.albumId === userId && (
+              {session.user?.username === contact.username && (
                 <div className="flex space-x-2 mb-2">
                   <Button
                     variant="outline"
@@ -131,13 +129,13 @@ export default function PhotoCards({
           <EditPhotoModal
             isOpen={editModalOpen}
             onClose={() => setEditModalOpen(false)}
-            token={token}
+            token={session.token}
             id={selectedPhoto.id}
           />
           <DeletePhotoModal
             isOpen={deleteModalOpen}
             onClose={() => setDeleteModalOpen(false)}
-            token={token}
+            token={session.token}
             id={selectedPhoto.id}
           />
         </>

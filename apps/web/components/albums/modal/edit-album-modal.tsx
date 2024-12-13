@@ -20,6 +20,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import { editAlbumService } from "@/services/albums/edit-album";
+import { ApiError } from "@/utils/interfaces/api-response.interface";
 
 const editAlbumSchema = z.object({
   title: z.string().min(3).max(255),
@@ -65,8 +66,9 @@ export default function EditAlbumModal({
       onClose();
       router.refresh();
     },
-    onError: () => {
-      toast.error("Erro ao editar foto");
+    onError: (error: ApiError) => {
+      toast.error(error.response?.data?.message);
+      setLoading(false);
     },
   });
 
@@ -87,7 +89,9 @@ export default function EditAlbumModal({
         </DialogHeader>
         <form onSubmit={handleSubmit(handleEditAlbum)} className="space-y-4">
           <div>
-            <Label htmlFor="title">{messages.albums.editAlbum.titleLabel}</Label>
+            <Label htmlFor="title">
+              {messages.albums.editAlbum.titleLabel}
+            </Label>
             <Input
               id="title"
               {...register("title")}

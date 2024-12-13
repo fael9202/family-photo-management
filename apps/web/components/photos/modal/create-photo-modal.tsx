@@ -20,6 +20,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import { addPhotoService } from "@/services/photos/create-photo";
+import { ApiError } from "@/utils/interfaces/api-response.interface";
 
 const addPhotoSchema = z.object({
   title: z.string().min(3).max(255),
@@ -65,8 +66,9 @@ export default function AddPhotoModal({
       onClose();
       router.refresh();
     },
-    onError: () => {
-      toast.error("Erro ao adicionar foto");
+    onError: (error: ApiError) => {
+      toast.error(error.response?.data?.message);
+      setLoading(false);
     },
   });
 

@@ -51,7 +51,7 @@ export default function LoginForm() {
       setSuccess(true);
     },
     onError: (error) => {
-      console.log("Error:", error);
+      setLoading(false);
       toast.error(error.toString());
     },
   });

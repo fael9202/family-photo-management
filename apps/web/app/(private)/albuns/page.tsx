@@ -15,7 +15,6 @@ export default async function AlbumsPage() {
       <h1 className="text-3xl font-bold mb-4">
         {messages.common.welcome}, {session.user?.username}
       </h1>
-      <p className="mb-4">{session.user?.email}</p>
       <AllAlbums userId={session.user?.id} session={session} />
     </div>
   );

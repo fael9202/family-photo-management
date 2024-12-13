@@ -7,7 +7,7 @@ import AlbumCards from "./album-cards";
 import { Session } from "next-auth";
 
 export default function AllAlbums({ userId, session }: { userId: number, session: Session }) {
-  const { data, isLoading, pagination, setPagination } = useAlbums();
+  const { data, isLoading, pagination, setPagination } = useAlbums(session);
   if (isLoading) {
     return <AlbumSkeleton />;
   }

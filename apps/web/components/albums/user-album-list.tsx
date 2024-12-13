@@ -50,10 +50,6 @@ export default function UserAlbumList({
       <AlbumCards
         data={data}
         userId={Number(session.user?.id)}
-        contact={{
-          email: data?.email || "",
-          username: data?.userName || "",
-        }}
         token={session.token}
       />
       <Pagination

@@ -9,3 +9,12 @@ export interface ApiResponse<T = unknown> {
   data?: T;
   errors?: ErrorResponse[];
 }
+
+export interface ApiError {
+  response: {
+    data: {
+      status: boolean;
+      message: string;
+    };
+  };
+}

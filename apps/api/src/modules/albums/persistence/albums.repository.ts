@@ -1,18 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { Album } from '@prisma/client';
 import { DatabaseService } from 'src/shared/config/database';
-import { CreateAlbumDto } from '../core/dto/create-album.dto';
 import { UpdateAlbumDto } from '../core/dto/update-album.dto';
 
 @Injectable()
 export class AlbumRepository {
   constructor(private databaseService: DatabaseService) {}
-
-  async getAllAlbums(page: number, pageSize: number): Promise<Album[]> {
+  // como posso incluir o user na tipagem do retorno do album?
+  async getAllAlbums(
+    page: number,
+    pageSize: number,
+  ): Promise<
+    (Album & {
+      user: {
+        username: string;
+        email: string;
+        id: number;
+      };
+    })[]
+  > {
     return this.databaseService.album.findMany({
       where: {},
       skip: (Number(page) - 1) * Number(pageSize),
       take: pageSize,
+      include: {
+        user: {
+          select: {
+            username: true,
+            email: true,
+            id: true,
+          },
+        },
+      },
     });
   }
 

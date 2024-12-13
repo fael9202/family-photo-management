@@ -20,6 +20,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { editPhotoService } from "@/services/photos/edit-photo";
 import { Loader2 } from "lucide-react";
+import { ApiError } from "@/utils/interfaces/api-response.interface";
 
 const editPhotoSchema = z.object({
   title: z.string().min(3).max(255),
@@ -65,8 +66,9 @@ export default function EditPhotoModal({
       onClose();
       router.refresh();
     },
-    onError: () => {
-      toast.error("Erro ao editar foto");
+    onError: (error: ApiError) => {
+      toast.error(error.response?.data?.message);
+      setLoading(false);
     },
   });
 

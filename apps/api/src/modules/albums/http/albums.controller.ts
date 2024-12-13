@@ -32,6 +32,7 @@ export class AlbumsController {
     private readonly removeAlbumService: RemoveAlbumService,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async getAllAlbums(@Query() query: AlbumsQueryDto) {
     const data = await this.getAllAlbumsService.execute(query);
@@ -42,6 +43,7 @@ export class AlbumsController {
     };
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':albumId')
   async getAlbumPhotos(
     @Param('albumId') albumId: string,

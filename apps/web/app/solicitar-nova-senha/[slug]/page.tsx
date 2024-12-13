@@ -67,6 +67,7 @@ export default function NewPasswordForm({
       setSuccess(true);
     },
     onError: (error) => {
+      setLoading(false);
       toast.error(error.message);
     },
   });

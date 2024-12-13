@@ -10,6 +10,17 @@ export class UpdateAlbumService {
 
   async execute(id: number, updateAlbumDto: UpdateAlbumDto, user: IUserGuard) {
     //validar se o usuário é o dono do álbum
+    const albumByTitle = await this.albumsRepository.findByTitle(
+      updateAlbumDto.title,
+    );
+
+    if (albumByTitle) {
+      throw new HttpException(
+        { status: false, message: 'Este álbum já existe.' },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const album = await this.albumsRepository.findAlbumById(id);
     if (!album) {
       throw new HttpException(

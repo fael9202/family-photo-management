@@ -9,6 +9,16 @@ export class UpdatePhotoService {
 
   async execute(id: number, updatePhotoDto: UpdatePhotoDto, user: IUserGuard) {
     //validar se o usuário é o dono da foto
+
+    const photoByTitle = await this.photosRepository.findByTitle(
+      updatePhotoDto.title,
+    );
+    if (photoByTitle) {
+      throw new HttpException(
+        { status: false, message: 'Foto já existe.' },
+        HttpStatus.CONFLICT,
+      );
+    }
     const photo = await this.photosRepository.findById(id);
     if (!photo) {
       throw new HttpException(

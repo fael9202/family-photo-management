@@ -19,6 +19,7 @@ export default function AlbumPhotosList({
 }) {
   const { data, isLoading, pagination, setPagination } = useAlbumPhotos({
     paramId,
+    session,
   });
   const [addPhotoModalOpen, setAddPhotoModalOpen] = useState(false);
 
@@ -26,7 +27,7 @@ export default function AlbumPhotosList({
     return <AlbumPhotosSkeleton />;
   }
 
-  if (!data ) {
+  if (!data) {
     return <AlbumPhotoNotFound />;
   }
 
@@ -49,12 +50,11 @@ export default function AlbumPhotosList({
       )}
       <AlbumCards
         data={data}
-        userId={Number(session.user?.id)}
         contact={{
-          email: data?.album.user.email || "",
-          username: data?.album.user.username || "",
+          email: data?.album.user.email,
+          username: data?.album.user.username,
         }}
-        token={session.token}
+        session={session}
       />
       <Pagination
         pagination={pagination}

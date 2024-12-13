@@ -16,6 +16,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { deletePhotoService } from "@/services/photos/delete-photo";
 import { Loader2 } from "lucide-react";
+import { ApiError } from "@/utils/interfaces/api-response.interface";
 
 interface DeletePhotoModalProps {
   isOpen: boolean;
@@ -47,8 +48,9 @@ export default function DeletePhotoModal({
       onClose();
       router.refresh();
     },
-    onError: () => {
-      toast.error("Erro ao excluir foto");
+    onError: (error: ApiError) => {
+      toast.error(error.response?.data?.message);
+      setLoading(false);
     },
   });
 

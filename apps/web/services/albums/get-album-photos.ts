@@ -7,13 +7,16 @@ export async function GetAlbumPhotosService(
     pageIndex: number;
     pageSize: number;
   },
-  albumId: number
+  albumId: number,
+  token: string
 ): Promise<IPhotoAlbum> {
   const baseUrl =
     `${process.env.NEXT_PUBLIC_API_URL}/albums/${albumId}?page=${pagination.pageIndex}` +
     `${pagination.pageSize ? "&pageSize=" + pagination.pageSize : ""}`;
   const response = await axios.get(baseUrl, {
-    headers: {},
+    headers: {
+      Authorization: `${token}`,
+    },
   });
   return response.data.data;
 }
