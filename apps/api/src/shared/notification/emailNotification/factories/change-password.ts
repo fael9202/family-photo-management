@@ -3,12 +3,10 @@ import { MessageFactory } from 'src/shared/interfaces/notifications/notification
 export class ChangePasswordEmailMessage implements MessageFactory {
   private token: string;
   private subject: string;
-  private name: string;
 
-  constructor(token: string, name: string) {
+  constructor(token: string) {
     this.token = token;
     this.subject = 'Redefinição de senha';
-    this.name = name;
   }
 
   createSubject(): string {
@@ -106,7 +104,7 @@ export class ChangePasswordEmailMessage implements MessageFactory {
             <h2>Olá!</h2>
             <p>Vimos que você solicitou a redefinição de senha da sua conta. Se você não solicitou essa redefinição, por favor, ignore este e-mail.</p>
             <p>Para redefinir sua senha, clique no botão abaixo:</p>
-            <a href="${process.env.FRONT_END_URL}/solicitar-nova-senha/2" class="button" style="color: #ffffff !important; text-decoration: none !important;">Redefinir Senha</a>
+            <a href="${process.env.FRONT_END_URL}/solicitar-nova-senha/${this.token}" class="button" style="color: #ffffff !important; text-decoration: none !important;">Redefinir Senha</a>
         </div>
         <div class="footer">
             <p>&copy; Todos os direitos reservados.</p>

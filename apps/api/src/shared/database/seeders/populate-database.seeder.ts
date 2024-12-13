@@ -1,5 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { Album, Photo, User } from '@prisma/client';
+import * as bcrypt from 'bcryptjs';
 import { DatabaseService } from 'src/shared/config/database';
 import { JsonPlaceholderService } from 'src/shared/http/jsonPlaceHolder/json-placeholder.service';
 import { JsonPlaceHolderAlbum } from 'src/shared/interfaces/jsonplaceholder/jsonplaceholder.albums.interface';
@@ -54,6 +55,7 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
   }
 
   private async insertUser(user: JsonPlaceholderUser): Promise<User> {
+    const hashedPassword = await bcrypt.hash(`${user.username}`, 10);
     return await this.databaseService.user.create({
       data: {
         id: user.id,
@@ -62,6 +64,7 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
         email: user.email,
         phone: user.phone,
         website: user.website,
+        password: hashedPassword,
         address: {
           create: {
             street: user.address.street,

@@ -1,13 +1,18 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { SendEmailDto } from '../core/dto/send-email.dto';
 import { SendEmailService } from '../core/services/send-email.service';
+import { ChangePasswordDto } from '../core/dto/change.dto';
+import { ChangePasswordService } from '../core/services/change-password.service';
 // import { UsersService } from './users.service';
 // import { CreateUserDto } from './dto/create-user.dto';
 // import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly sendEmailService: SendEmailService) {}
+  constructor(
+    private readonly sendEmailService: SendEmailService,
+    private readonly changePasswordService: ChangePasswordService,
+  ) {}
 
   @Post('send-email')
   async sendEmail(@Body() sendEmailDto: SendEmailDto) {
@@ -15,6 +20,15 @@ export class UsersController {
     return {
       status: true,
       message: 'Email enviado com sucesso.',
+    };
+  }
+
+  @Post('change-password')
+  async changePassword(@Body() changePasswordDto: ChangePasswordDto) {
+    await this.changePasswordService.changePassword(changePasswordDto);
+    return {
+      status: true,
+      message: 'Senha alterada com sucesso.',
     };
   }
 

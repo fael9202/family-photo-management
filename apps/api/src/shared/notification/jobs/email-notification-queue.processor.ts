@@ -43,7 +43,6 @@ export class EmailNotificationProcessor {
     await new EmailNotification({
       emailMessage: new ChangePasswordEmailMessage(
         job.data.token ? job.data.token : '',
-        job.data.name ? job.data.name : '',
       ),
       to: job.data.userEmail,
       sender: new EmailService(),

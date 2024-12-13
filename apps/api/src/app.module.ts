@@ -6,12 +6,14 @@ import { LoggingInterceptor } from './shared/logging/interceptors/logging.interc
 import { UsersModule } from './modules/users/users.module';
 import { QueueConfigModule } from './shared/config/queues';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { AuthModule } from './modules/auth/auth.module';
 @Module({
   imports: [
     DatabaseModule,
     UsersModule,
     QueueConfigModule,
     EventEmitterModule.forRoot(),
+    AuthModule,
   ],
   providers: [
     {

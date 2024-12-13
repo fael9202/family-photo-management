@@ -4,10 +4,20 @@ import { UsersController } from './http/users.controller';
 import { SendEmailService } from './core/services/send-email.service';
 import { NotificationModule } from 'src/shared/notification/notification.module';
 import { EmailNotificationEmitter } from './core/events/email-notification-emitter';
+import { ChangePasswordService } from './core/services/change-password.service';
+import { UserRepository } from './persistence/user.repository';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [NotificationModule],
   controllers: [UsersController],
-  providers: [UsersService, SendEmailService, EmailNotificationEmitter],
+  providers: [
+    UsersService,
+    SendEmailService,
+    ChangePasswordService,
+    UserRepository,
+    EmailNotificationEmitter,
+    JwtService,
+  ],
 })
 export class UsersModule {}
