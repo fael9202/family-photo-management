@@ -31,3 +31,8 @@ export interface IEditPhotoResponse {
   message: string;
   data: IPhoto;
 }
+
+export interface IDeletePhotoResponse {
+  status: boolean;
+  message: string;
+}

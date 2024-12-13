@@ -10,33 +10,56 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import messages from "@/utils/messages/pt-br.json";
+import {} from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { deletePhotoService } from "@/services/photos/delete-photo";
+import { Loader2 } from "lucide-react";
 
 interface DeletePhotoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  photoId: number;
+  token: string;
+  id: number;
 }
 
 export default function DeletePhotoModal({
   isOpen,
   onClose,
-  photoId,
+  token,
+  id,
 }: DeletePhotoModalProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-  const handleDelete = async () => {
-    const response = await fetch(`/api/photos/${photoId}`, {
-      method: "DELETE",
-    });
+  const queryClient = useQueryClient();
 
-    if (response.ok) {
+  const mutation = useMutation({
+    mutationKey: ["deletePhoto"],
+    mutationFn: (data: { token: string; id: number }) =>
+      deletePhotoService(data),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["album-photos"] });
+      toast.success(
+        data?.message || data?.message || "Foto excluida com sucesso"
+      );
       onClose();
       router.refresh();
-    } else {
-      // Handle error
-      console.error("Failed to delete photo");
-    }
-  };
+    },
+    onError: () => {
+      toast.error("Erro ao excluir foto");
+    },
+  });
+
+  async function handleDeletePhoto() {
+    setLoading(true);
+    await mutation.mutateAsync({
+      token,
+      id,
+    });
+    setLoading(false);
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -49,7 +72,13 @@ export default function DeletePhotoModal({
           <Button type="button" variant="outline" onClick={onClose}>
             {messages.common.cancel}
           </Button>
-          <Button type="button" variant="destructive" onClick={handleDelete}>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={handleDeletePhoto}
+            disabled={loading}
+          >
+            {loading ? <Loader2 className="w-4 h-4 mr-2" /> : null}
             {messages.common.delete}
           </Button>
         </DialogFooter>

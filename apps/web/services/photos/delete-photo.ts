@@ -1,28 +1,25 @@
-import { IEditPhotoResponse } from "@/utils/interfaces/photo-albums.interface";
+import {
+  IDeletePhotoResponse,
+} from "@/utils/interfaces/photo-albums.interface";
 import axios from "axios";
 
-export async function editPhotoService({
-  title,
+export async function deletePhotoService({
   token,
   id,
 }: {
-  title: string;
   token: string;
   id: number;
-}): Promise<IEditPhotoResponse> {
+}): Promise<IDeletePhotoResponse> {
   const headers = {
     accept: "*/*",
     "Content-Type": "application/json",
     Authorization: token,
   };
 
-  const body = {
-    title,
-  };
   const url = `${process.env.NEXT_PUBLIC_API_URL}/photos/${id}`;
 
   try {
-    const response = await axios.patch<IEditPhotoResponse>(url, body, {
+    const response = await axios.delete<IDeletePhotoResponse>(url, {
       headers,
     });
     return response.data;

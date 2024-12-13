@@ -137,7 +137,8 @@ export default function PhotoCards({
           <DeletePhotoModal
             isOpen={deleteModalOpen}
             onClose={() => setDeleteModalOpen(false)}
-            photoId={selectedPhoto.id}
+            token={token}
+            id={selectedPhoto.id}
           />
         </>
       )}
