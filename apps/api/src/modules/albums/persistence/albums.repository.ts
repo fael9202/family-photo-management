@@ -39,4 +39,29 @@ export class AlbumRepository {
       },
     });
   }
+
+  async findAlbumById(albumId: number): Promise<{
+    id: number;
+    title: string;
+    user: {
+      username: string;
+      email: string;
+    };
+  } | null> {
+    return this.databaseService.album.findUnique({
+      where: {
+        id: Number(albumId),
+      },
+      select: {
+        id: true,
+        title: true,
+        user: {
+          select: {
+            username: true,
+            email: true,
+          },
+        },
+      },
+    });
+  }
 }

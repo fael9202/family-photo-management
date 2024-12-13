@@ -40,6 +40,10 @@ export enum AlbumsEvent {
   findAlbumsByUserId = 'albums.findAlbumsByUserId',
 }
 
+export enum PhotosEvent {
+  findPhotosByAlbumId = 'photos.findPhotosByAlbumId',
+}
+
 export enum SlackEvent {
   postToSlack = 'slack.postToSlack',
 }

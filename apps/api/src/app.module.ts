@@ -8,6 +8,7 @@ import { QueueConfigModule } from './shared/config/queues';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AuthModule } from './modules/auth/auth.module';
 import { AlbumsModule } from './modules/albums/albums.module';
+import { PhotosModule } from './modules/photos/photos.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -16,6 +17,7 @@ import { AlbumsModule } from './modules/albums/albums.module';
     EventEmitterModule.forRoot(),
     AuthModule,
     AlbumsModule,
+    PhotosModule,
   ],
   providers: [
     {

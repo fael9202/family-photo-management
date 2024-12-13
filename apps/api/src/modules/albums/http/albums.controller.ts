@@ -1,17 +1,8 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UseGuards,
-  HttpCode,
-  Get,
-  Query,
-} from '@nestjs/common';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
-import { GetUser } from 'src/shared/decorators/user.decorator';
-import { IUserGuard } from 'src/shared/utils/interfaces/user/user-guard.interface';
+import { Controller, Get, Query, Param } from '@nestjs/common';
+
 import { GetAllAlbumsService } from '../core/service/get-all-albums.service';
 import { AlbumsQueryDto } from '../core/dto/albums.query.dto';
+import { FindAlbumPhotosService } from '../core/service/find-album-photos.service';
 
 // import { UsersService } from './users.service';
 // import { CreateUserDto } from './dto/create-user.dto';
@@ -19,7 +10,10 @@ import { AlbumsQueryDto } from '../core/dto/albums.query.dto';
 
 @Controller('albums')
 export class AlbumsController {
-  constructor(private readonly getAllAlbumsService: GetAllAlbumsService) {}
+  constructor(
+    private readonly getAllAlbumsService: GetAllAlbumsService,
+    private readonly findAlbumPhotosService: FindAlbumPhotosService,
+  ) {}
 
   @Get()
   async getAllAlbums(@Query() query: AlbumsQueryDto) {
@@ -27,6 +21,19 @@ export class AlbumsController {
     return {
       status: true,
       message: 'Álbuns encontrados com sucesso.',
+      data,
+    };
+  }
+
+  @Get(':albumId')
+  async getAlbumPhotos(
+    @Param('albumId') albumId: string,
+    @Query() query: AlbumsQueryDto,
+  ) {
+    const data = await this.findAlbumPhotosService.execute(albumId, query);
+    return {
+      status: true,
+      message: 'Fotos do álbum encontradas com sucesso.',
       data,
     };
   }
