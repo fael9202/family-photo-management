@@ -19,10 +19,10 @@ export class CreateAlbumService {
       );
     }
 
-    const newAlbum = await this.albumsRepository.create(
-      createAlbumDto,
-      user.id,
-    );
+    const newAlbum = await this.albumsRepository.create({
+      ...createAlbumDto,
+      userId: user.id,
+    });
     return newAlbum;
   }
 }

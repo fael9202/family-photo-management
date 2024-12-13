@@ -13,3 +13,21 @@ export interface IAlbum {
   title: string;
   userId: number;
 }
+
+
+export interface IEditAlbumResponse {
+  status: boolean;
+  message: string;
+  data: IAlbum;
+}
+
+export interface IDeleteAlbumResponse {
+  status: boolean;
+  message: string;
+}
+
+export interface IAddAlbumResponse {
+  status: boolean;
+  message: string;
+  data: IAlbum;
+}

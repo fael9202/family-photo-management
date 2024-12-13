@@ -76,11 +76,17 @@ export class AlbumRepository {
     });
   }
 
-  async create(createAlbumDto: CreateAlbumDto, userId: number): Promise<Album> {
+  async create({
+    title,
+    userId,
+  }: {
+    title: string;
+    userId: number;
+  }): Promise<Album> {
     return this.databaseService.album.create({
       data: {
-        ...createAlbumDto,
-        userId,
+        title,
+        userId: Number(userId),
       },
     });
   }

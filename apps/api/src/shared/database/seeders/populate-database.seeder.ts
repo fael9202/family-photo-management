@@ -90,7 +90,6 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
   ): Promise<Album> {
     return await this.databaseService.album.create({
       data: {
-        id: album.id,
         title: album.title,
         userId: userId,
       },
@@ -103,7 +102,6 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
   ): Promise<Photo> {
     return await this.databaseService.photo.create({
       data: {
-        id: photo.id,
         albumId: albumId,
         title: photo.title,
         url: photo.url,

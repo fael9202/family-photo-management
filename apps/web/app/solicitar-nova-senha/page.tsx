@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckCircle, ArrowLeft } from "lucide-react";
-import { requestNewPasswordService } from "@/services/request-new-password/requestNewPassword";
+import { requestNewPasswordService } from "@/services/request-new-password/request-new-password";
 
 const requestNewPasswordSchema = z.object({
   email: z.string().email(),

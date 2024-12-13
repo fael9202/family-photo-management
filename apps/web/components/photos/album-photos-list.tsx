@@ -26,7 +26,7 @@ export default function AlbumPhotosList({
     return <AlbumPhotosSkeleton />;
   }
 
-  if (!data || data.photos.length === 0) {
+  if (!data ) {
     return <AlbumPhotoNotFound />;
   }
 

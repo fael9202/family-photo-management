@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckCircle, ArrowLeft, Eye, EyeOff } from "lucide-react";
-import { newPasswordService } from "@/services/request-new-password/newPassword";
+import { newPasswordService } from "@/services/request-new-password/new-password";
 
 const newPasswordSchema = z
   .object({

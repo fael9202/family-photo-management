@@ -18,28 +18,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { editPhotoService } from "@/services/photos/edit-photo";
 import { Loader2 } from "lucide-react";
+import { editAlbumService } from "@/services/albums/edit-album";
 
-const editPhotoSchema = z.object({
+const editAlbumSchema = z.object({
   title: z.string().min(3).max(255),
 });
 
-type EditPhotoSchema = z.infer<typeof editPhotoSchema>;
+type EditAlbumSchema = z.infer<typeof editAlbumSchema>;
 
-interface EditPhotoModalProps {
+interface EditAlbumModalProps {
   isOpen: boolean;
   onClose: () => void;
   token: string;
   id: number;
 }
 
-export default function EditPhotoModal({
+export default function EditAlbumModal({
   isOpen,
   onClose,
   token,
   id,
-}: EditPhotoModalProps) {
+}: EditAlbumModalProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -47,8 +47,8 @@ export default function EditPhotoModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EditPhotoSchema>({
-    resolver: zodResolver(editPhotoSchema),
+  } = useForm<EditAlbumSchema>({
+    resolver: zodResolver(editAlbumSchema),
   });
 
   const queryClient = useQueryClient();
@@ -56,9 +56,9 @@ export default function EditPhotoModal({
   const mutation = useMutation({
     mutationKey: ["editPhoto"],
     mutationFn: (data: { title: string; token: string; id: number }) =>
-      editPhotoService(data),
+      editAlbumService(data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["album-photos"] });
+      queryClient.invalidateQueries({ queryKey: ["user-albums"] });
       toast.success(
         data?.message || data?.message || "Foto editada com sucesso"
       );
@@ -70,7 +70,7 @@ export default function EditPhotoModal({
     },
   });
 
-  async function handleEditPhoto(data: EditPhotoSchema) {
+  async function handleEditAlbum(data: EditAlbumSchema) {
     setLoading(true);
     await mutation.mutateAsync({
       title: data.title,
@@ -83,16 +83,16 @@ export default function EditPhotoModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{messages.photo.editPhoto.title}</DialogTitle>
+          <DialogTitle>{messages.albums.editAlbum.title}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(handleEditPhoto)} className="space-y-4">
+        <form onSubmit={handleSubmit(handleEditAlbum)} className="space-y-4">
           <div>
-            <Label htmlFor="title">{messages.photo.editPhoto.titleLabel}</Label>
+            <Label htmlFor="title">{messages.albums.editAlbum.titleLabel}</Label>
             <Input
               id="title"
               {...register("title")}
               required
-              placeholder={messages.photo.editPhoto.titlePlaceholder}
+              placeholder={messages.albums.editAlbum.titlePlaceholder}
             />
           </div>
           {errors.title && (

@@ -7,7 +7,7 @@ export const useUserAlbums = ({ paramId }: { paramId: number }) => {
   const [pagination, setPagination] = useState({ pageIndex: 1, pageSize: 10 });
   const { data, error, isLoading } = useQuery({
     queryKey: [
-      `user-albums-${pagination.pageIndex}-${pagination.pageSize}`,
+      `user-albums`,
       { pagination: pagination },
       paramId,
     ],

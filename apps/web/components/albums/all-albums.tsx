@@ -4,8 +4,9 @@ import AlbumSkeleton from "./album-skeleton";
 import AlbumNotFound from "./album-not-found";
 import Pagination from "../ui/pagination";
 import AlbumCards from "./album-cards";
+import { Session } from "next-auth";
 
-export default function AllAlbums({ userId }: { userId: number }) {
+export default function AllAlbums({ userId, session }: { userId: number, session: Session }) {
   const { data, isLoading, pagination, setPagination } = useAlbums();
   if (isLoading) {
     return <AlbumSkeleton />;
@@ -17,7 +18,9 @@ export default function AllAlbums({ userId }: { userId: number }) {
 
   return (
     <div className="space-y-8">
-      <AlbumCards data={data} userId={userId} />
+
+      
+      <AlbumCards data={data} userId={userId} token={session.token} />
       <Pagination
         pagination={pagination}
         setPagination={setPagination}

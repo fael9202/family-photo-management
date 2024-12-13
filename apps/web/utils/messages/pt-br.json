@@ -26,7 +26,30 @@
     "yourAlbum": "Este álbum pertence a você !",
     "noAlbums": "Nenhum álbum encontrado",
     "noAlbumsDescription": "Este usuário ainda não criou nenhum álbum.",
-    "loading": "Carregando álbuns..."
+    "loading": "Carregando álbuns...",
+    "add": "Adicionar Álbum",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "addAlbum": {
+      "title": "Adicionar Álbum",
+      "titleLabel": "Novo título",
+      "titlePlaceholder": "Digite o novo título do álbum",
+      "save": "Salvar",
+      "cancel": "Cancelar"
+    },
+    "editAlbum": {
+      "title": "Editar Álbum",
+      "titleLabel": "Novo título",
+      "titlePlaceholder": "Digite o novo título do álbum",
+      "save": "Salvar",
+      "cancel": "Cancelar"
+    },
+    "deleteAlbum": {
+      "title": "Excluir Álbum",
+      "warning": "Tem certeza que deseja excluir este álbum?",
+      "save": "Salvar",
+      "cancel": "Cancelar"
+    }
   },
   "users": {
     "users": "Usuários",

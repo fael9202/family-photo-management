@@ -19,27 +19,25 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { addPhotoService } from "@/services/photos/create-photo";
+import { addAlbumService } from "@/services/albums/create-album";
 
-const addPhotoSchema = z.object({
+const addAlbumSchema = z.object({
   title: z.string().min(3).max(255),
 });
 
-type AddPhotoSchema = z.infer<typeof addPhotoSchema>;
+type AddAlbumSchema = z.infer<typeof addAlbumSchema>;
 
-interface AddPhotoModalProps {
+interface AddAlbumModalProps {
   isOpen: boolean;
   onClose: () => void;
   token: string;
-  albumId: number;
 }
 
-export default function AddPhotoModal({
+export default function AddAlbumModal({
   isOpen,
   onClose,
   token,
-  albumId,
-}: AddPhotoModalProps) {
+}: AddAlbumModalProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -47,35 +45,34 @@ export default function AddPhotoModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddPhotoSchema>({
-    resolver: zodResolver(addPhotoSchema),
+  } = useForm<AddAlbumSchema>({
+    resolver: zodResolver(addAlbumSchema),
   });
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationKey: ["addPhoto"],
-    mutationFn: (data: { title: string; token: string; albumId: number }) =>
-      addPhotoService(data),
+    mutationKey: ["addAlbum"],
+    mutationFn: (data: { title: string; token: string }) =>
+      addAlbumService(data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["album-photos"] });
+      queryClient.invalidateQueries({ queryKey: ["user-albums"] });
       toast.success(
-        data?.message || data?.message || "Foto adicionada com sucesso"
+        data?.message || data?.message || "Álbum adicionado com sucesso"
       );
       onClose();
       router.refresh();
     },
     onError: () => {
-      toast.error("Erro ao adicionar foto");
+      toast.error("Erro ao adicionar álbum");
     },
   });
 
-  async function handleAddPhoto(data: AddPhotoSchema) {
+  async function handleAddAlbum(data: AddAlbumSchema) {
     setLoading(true);
     await mutation.mutateAsync({
       title: data.title,
       token,
-      albumId,
     });
     setLoading(false);
   }
@@ -83,16 +80,16 @@ export default function AddPhotoModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{messages.photo.addPhoto.title}</DialogTitle>
+          <DialogTitle>{messages.albums.addAlbum.title}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(handleAddPhoto)} className="space-y-4">
+        <form onSubmit={handleSubmit(handleAddAlbum)} className="space-y-4">
           <div>
-            <Label htmlFor="title">{messages.photo.addPhoto.titleLabel}</Label>
+            <Label htmlFor="title">{messages.albums.addAlbum.titleLabel}</Label>
             <Input
               id="title"
               {...register("title")}
               required
-              placeholder={messages.photo.addPhoto.titlePlaceholder}
+              placeholder={messages.albums.addAlbum.titlePlaceholder}
             />
           </div>
           {errors.title && (
