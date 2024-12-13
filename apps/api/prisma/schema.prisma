@@ -23,6 +23,8 @@ model User {
   company  Company?
   address  Address?
   albums   Album[]
+
+  @@unique([email, username])
 }
 
 model Company {
@@ -31,7 +33,7 @@ model Company {
   catchPhrase String
   bs          String
   userId      Int    @unique
-  user        User   @relation(fields: [userId], references: [id])
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Address {
@@ -48,7 +50,7 @@ model Album {
   id     Int     @id @default(autoincrement())
   title  String
   userId Int
-  user   User    @relation(fields: [userId], references: [id])
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   photos Photo[]
 }
 
@@ -58,5 +60,5 @@ model Photo {
   title        String
   url          String
   thumbnailUrl String
-  album        Album  @relation(fields: [albumId], references: [id])
+  album        Album  @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
