@@ -1,4 +1,13 @@
-import { Controller, Post, Body, UseGuards, HttpCode } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  HttpCode,
+  Get,
+  Query,
+  Param,
+} from '@nestjs/common';
 import { SendEmailDto } from '../core/dto/send-email.dto';
 import { SendEmailService } from '../core/services/send-email.service';
 import { ChangePasswordDto } from '../core/dto/change.dto';
@@ -8,6 +17,9 @@ import { GetUser } from 'src/shared/decorators/user.decorator';
 import { IUserGuard } from 'src/shared/utils/interfaces/user/user-guard.interface';
 import { LoginDto } from '../core/dto/login.dto';
 import { LoginService } from '../core/services/login.service';
+import { GetAllUsersService } from '../core/services/get-all-users.service';
+import { UsersQueryDto } from '../core/dto/users-query.dto';
+import { FindUserAlbumsService } from '../core/services/find-user-albums.service';
 // import { UsersService } from './users.service';
 // import { CreateUserDto } from './dto/create-user.dto';
 // import { UpdateUserDto } from './dto/update-user.dto';
@@ -18,6 +30,8 @@ export class UsersController {
     private readonly sendEmailService: SendEmailService,
     private readonly changePasswordService: ChangePasswordService,
     private readonly loginService: LoginService,
+    private readonly getAllUsersService: GetAllUsersService,
+    private readonly findUserAlbumsService: FindUserAlbumsService,
   ) {}
 
   @Post('request-new-password')
@@ -53,14 +67,27 @@ export class UsersController {
     };
   }
 
+  @Get()
+  async findAll(@Query() query: UsersQueryDto) {
+    const users = await this.getAllUsersService.execute(query);
+    return {
+      status: true,
+      message: 'Usuários encontrados com sucesso.',
+      data: users,
+    };
+  }
+
+  @Get(':userId/albums')
+  async getUserAlbums(
+    @Param('userId') userId: string,
+    @Query() query: UsersQueryDto,
+  ) {
+    return await this.findUserAlbumsService.execute(userId, query);
+  }
+
   // @Post()
   // create(@Body() createUserDto: CreateUserDto) {
   //   return this.usersService.create(createUserDto);
-  // }
-
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
   // }
 
   // @Get(':id')

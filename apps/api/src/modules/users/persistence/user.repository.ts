@@ -32,4 +32,30 @@ export class UserRepository {
       },
     });
   }
+
+  //faça um omit para o password na tipagem do retorno
+  async findAll(
+    page: number,
+    pageSize: number,
+  ): Promise<Omit<User, 'password'>[]> {
+    return this.databaseService.user.findMany({
+      skip: (Number(page) - 1) * Number(pageSize),
+      take: Number(pageSize),
+      select: {
+        website: true,
+        name: true,
+        email: true,
+        username: true,
+        password: false,
+        id: true,
+        address: true,
+        phone: true,
+        company: true,
+      },
+    });
+  }
+
+  async getAllUsersCount(): Promise<number> {
+    return this.databaseService.user.count();
+  }
 }

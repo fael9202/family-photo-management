@@ -20,5 +20,19 @@
     "noAlbums": "Nenhum álbum encontrado",
     "noAlbumsDescription": "Este usuário ainda não criou nenhum álbum.",
     "loading": "Carregando álbuns..."
+  },
+  "users": {
+    "users": "Usuários",
+    "noUsers": "Nenhum usuário encontrado",
+    "noUsersDescription": "Nenhum usuário encontrado.",
+    "table":{
+      "header":{
+        "name": "Nome",
+        "email": "Email",
+        "username": "Nome de usuário",
+        "actions": "Ações"
+      },
+      "viewAlbums": "Ver Álbuns"
+    }
   }
 }

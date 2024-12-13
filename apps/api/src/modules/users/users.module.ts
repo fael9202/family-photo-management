@@ -8,6 +8,8 @@ import { ChangePasswordService } from './core/services/change-password.service';
 import { UserRepository } from './persistence/user.repository';
 import { JwtService } from '@nestjs/jwt';
 import { LoginService } from './core/services/login.service';
+import { GetAllUsersService } from './core/services/get-all-users.service';
+import { FindUserAlbumsService } from './core/services/find-user-albums.service';
 
 @Module({
   imports: [NotificationModule],
@@ -17,6 +19,8 @@ import { LoginService } from './core/services/login.service';
     SendEmailService,
     ChangePasswordService,
     LoginService,
+    GetAllUsersService,
+    FindUserAlbumsService,
     UserRepository,
     EmailNotificationEmitter,
     JwtService,

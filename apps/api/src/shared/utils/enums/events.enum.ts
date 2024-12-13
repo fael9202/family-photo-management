@@ -36,8 +36,8 @@ export enum WebhookEvent {
   cashin = 'webhook.cashin',
 }
 
-export enum UserEvent {
-  findById = 'user.findById',
+export enum AlbumsEvent {
+  findAlbumsByUserId = 'albums.findAlbumsByUserId',
 }
 
 export enum SlackEvent {
