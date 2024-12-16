@@ -7,7 +7,7 @@ import {
   EmailEvent,
   EmailNotificationProcess,
   NotificationQueues,
-} from 'src/shared/utils/enums/events.enum';
+} from '../../../shared/utils/enums/events.enum';
 
 @Injectable()
 export class EmailListener {

@@ -13,9 +13,9 @@ import { UpdatePhotoDto } from '../core/dto/update-photo.dto';
 import { CreatePhotoService } from '../core/services/create-photo.service';
 import { UpdatePhotoService } from '../core/services/update-photo.service';
 import { RemovePhotoService } from '../core/services/remove-photo.service';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
-import { GetUser } from 'src/shared/decorators/user.decorator';
-import { IUserGuard } from 'src/shared/utils/interfaces/user/user-guard.interface';
+import { JwtAuthGuard } from '../../../shared/guards/jwt-auth.guard';
+import { GetUser } from '../../../shared/decorators/user.decorator';
+import { IUserGuard } from '../../../shared/utils/interfaces/user/user-guard.interface';
 
 @Controller('photos')
 export class PhotosController {
@@ -65,14 +65,4 @@ export class PhotosController {
       message: 'Foto removida com sucesso.',
     };
   }
-
-  // @Get()
-  // findAll() {
-  //   return this.photosService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.photosService.findOne(+id);
-  // }
 }

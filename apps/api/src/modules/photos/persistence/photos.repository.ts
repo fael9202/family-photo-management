@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Photo } from '@prisma/client';
-import { DatabaseService } from 'src/shared/config/database';
+import { DatabaseService } from '../../../shared/config/database';
 import { CreatePhotoDto } from '../core/dto/create-photo.dto';
 import { UpdatePhotoDto } from '../core/dto/update-photo.dto';
 

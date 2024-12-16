@@ -25,10 +25,6 @@ export async function addAlbumService({
     });
     return response.data;
   } catch (error) {
-    if (error.response.status === 401) {
-      
-      
-    }
     throw error;
   }
 }

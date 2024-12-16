@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from '../dto/login.dto';
-import CustomError from 'src/shared/utils/exceptions/custom-error';
-import statusCode from 'src/shared/utils/exceptions/statusCode';
+import CustomError from '../../../../shared/utils/exceptions/custom-error';
+import statusCode from '../../../../shared/utils/exceptions/statusCode';
 import * as bcrypt from 'bcryptjs';
-import { verifySpecialChars } from 'src/shared/utils/helpers/verifySpecialChars';
+import { verifySpecialChars } from '../../../../shared/utils/helpers/verifySpecialChars';
 import { UserRepository } from '../../persistence/user.repository';
 
 @Injectable()

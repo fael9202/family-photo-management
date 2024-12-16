@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { SendEmailDto } from '../dto/send-email.dto';
-import { SendEmailEvent } from 'src/shared/notification/emailNotification/events/send-email.event';
+import { SendEmailEvent } from '../../../../shared/notification/emailNotification/events/send-email.event';
 import { EmailNotificationEmitter } from '../events/email-notification-emitter';
 import { UserRepository } from '../../persistence/user.repository';
 import { JwtService } from '@nestjs/jwt';
-import { EmailEvent } from 'src/shared/utils/enums/events.enum';
+import { EmailEvent } from '../../../../shared/utils/enums/events.enum';
 
 @Injectable()
 export class SendEmailService {

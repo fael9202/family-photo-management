@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Album } from '@prisma/client';
-import { DatabaseService } from 'src/shared/config/database';
+import { DatabaseService } from '../../../shared/config/database';
 import { UpdateAlbumDto } from '../core/dto/update-album.dto';
 
 @Injectable()

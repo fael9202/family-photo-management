@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { UsersQueryDto } from 'src/modules/users/core/dto/users-query.dto';
-import { AlbumsEvent } from 'src/shared/utils/enums/events.enum';
+import { UsersQueryDto } from '../../../users/core/dto/users-query.dto';
+import { AlbumsEvent } from '../../../../shared/utils/enums/events.enum';
 import { AlbumRepository } from '../../persistence/albums.repository';
-import { UserAlbums } from 'src/modules/users/core/services/find-user-albums.service';
+import { UserAlbums } from '../../../users/core/services/find-user-albums.service';
 
 @Injectable()
 export class FindAlbumsByUserIdService {

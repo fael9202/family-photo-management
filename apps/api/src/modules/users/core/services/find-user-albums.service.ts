@@ -1,5 +1,5 @@
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { AlbumsEvent } from 'src/shared/utils/enums/events.enum';
+import { AlbumsEvent } from '../../../../shared/utils/enums/events.enum';
 import { UsersQueryDto } from '../dto/users-query.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Album } from '@prisma/client';

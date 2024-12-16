@@ -1,5 +1,5 @@
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { PhotosEvent } from 'src/shared/utils/enums/events.enum';
+import { PhotosEvent } from '../../../../shared/utils/enums/events.enum';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Photo } from '@prisma/client';
 import { AlbumRepository } from '../../persistence/albums.repository';

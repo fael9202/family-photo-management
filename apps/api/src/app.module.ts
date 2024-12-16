@@ -9,6 +9,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AuthModule } from './modules/auth/auth.module';
 import { AlbumsModule } from './modules/albums/albums.module';
 import { PhotosModule } from './modules/photos/photos.module';
+import { DatabaseSeederModule } from './shared/database/database-seeder.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -18,6 +19,7 @@ import { PhotosModule } from './modules/photos/photos.module';
     AuthModule,
     AlbumsModule,
     PhotosModule,
+    DatabaseSeederModule,
   ],
   providers: [
     {

@@ -13,14 +13,14 @@ import {
 import { GetAllAlbumsService } from '../core/service/get-all-albums.service';
 import { AlbumsQueryDto } from '../core/dto/albums.query.dto';
 import { FindAlbumPhotosService } from '../core/service/find-album-photos.service';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
-import { GetUser } from 'src/shared/decorators/user.decorator';
-import { IUserGuard } from 'src/shared/utils/interfaces/user/user-guard.interface';
+import { JwtAuthGuard } from '../../../shared/guards/jwt-auth.guard';
+import { GetUser } from '../../../shared/decorators/user.decorator';
+import { IUserGuard } from '../../../shared/utils/interfaces/user/user-guard.interface';
 import { CreateAlbumDto } from '../core/dto/create-album.dto';
 import { UpdateAlbumDto } from '../core/dto/update-album.dto';
-import { CreateAlbumService } from '../core/service/create-photo.service';
-import { UpdateAlbumService } from '../core/service/update-photo.service';
-import { RemoveAlbumService } from '../core/service/remove-photo.service';
+import { CreateAlbumService } from '../core/service/create-album.service';
+import { UpdateAlbumService } from '../core/service/update-album.service';
+import { RemoveAlbumService } from '../core/service/remove-album.service';
 
 @Controller('albums')
 export class AlbumsController {

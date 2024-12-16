@@ -7,14 +7,14 @@ import {
 } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 import { Job } from 'bull';
-import { EmailSender } from 'src/shared/utils/interfaces/notifications/notification.interface';
+import { EmailSender } from '../../../shared/utils/interfaces/notifications/notification.interface';
 import { EmailNotification } from '../emailNotification/EmailNotification';
 import { ChangePasswordEmailMessage } from '../emailNotification/factories/change-password';
 import { EmailService } from '../emailNotification/strategies/resend.strategy';
 import {
   EmailNotificationProcess,
   NotificationQueues,
-} from 'src/shared/utils/enums/events.enum';
+} from '../../../shared/utils/enums/events.enum';
 
 @Injectable()
 @Processor(NotificationQueues.email)
