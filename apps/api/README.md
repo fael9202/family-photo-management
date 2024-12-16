@@ -1,85 +1,148 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Backend Modular Architecture
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 📂 Estrutura de Diretórios
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```
+src/
+│
+├── __mocks__/            # Mocks para testes e simulações
+│
+├── modules/              # Módulos de negócio
+│   ├── albums/           # Módulo de Álbuns
+│   │   ├── core/         # Lógica de negócio principal
+│   │   ├── http/         # Controladores e DTOs
+│   │   ├── persistence/  # Camada de persistência
+│   │   └── tests/        # Testes específicos do módulo
+│   │
+│   ├── auth/             # Módulo de Autenticação
+│   │   ├── services/     # Serviços de autenticação
+│   │   └── strategys/    # Estratégias de autenticação
+│   │
+│   ├── photos/           # Módulo de Fotos
+│   │   ├── core/         # Lógica de negócio principal
+│   │   ├── http/         # Controladores e DTOs
+│   │   ├── persistence/  # Camada de persistência
+│   │   └── tests/        # Testes específicos do módulo
+│   │
+│   └── users/            # Módulo de Usuários
+│       ├── core/         # Lógica de negócio principal
+│       ├── http/         # Controladores e DTOs
+│       ├── persistence/  # Camada de persistência
+│       └── tests/        # Testes específicos do módulo
+│
+└── shared/               # Recursos compartilhados
+    ├── config/           # Configurações globais
+    │   ├── database/     # Configurações de banco de dados
+    │   ├── queues/       # Configurações de filas
+    │   └── redis/        # Configurações do Redis
+    │
+    ├── database/         # Utilitários de banco de dados
+    │   ├── database-seeder.module.ts
+    │   └── seeders/      # Seeds para banco de dados
+    │
+    ├── decorators/       # Decoradores customizados
+    ├── dto/              # DTOs compartilhados
+    ├── guards/           # Guardas de autenticação
+    │
+    ├── notification/     # Sistema de notificações
+    │   ├── emailNotification/
+    │   ├── jobs/
+    │   └── notification.module.ts
+    │
+    └── utils/            # Utilitários globais
+        ├── enums/
+        ├── exceptions/
+        ├── helpers/
+        └── interfaces/
 ```
 
-## Compile and run the project
+## 🏗️ Princípios Arquiteturais
 
-```bash
-# development
-$ npm run start
+### Modularidade
+Cada módulo de negócio segue uma estrutura consistente:
+- `core/`: Lógica de negócio principal
+- `http/`: Controladores e DTOs
+- `persistence/`: Camada de persistência
+- `tests/`: Testes específicos do módulo
 
-# watch mode
-$ npm run start:dev
+### Shared
+Recursos compartilhados que podem ser usados por múltiplos módulos:
+- Configurações
+- Decoradores
+- Guards
+- Utilitários
+- Sistema de notificação
 
-# production mode
-$ npm run start:prod
+## 🔍 Detalhamento dos Módulos
+
+### 🔐 Módulo de Autenticação (`auth/`)
+- Gerencia estratégias de autenticação
+- Serviços de autenticação
+- Implementação de estratégias de login
+
+### 👥 Módulo de Usuários (`users/`)
+- Gerenciamento de perfis de usuário
+- Operações CRUD de usuários
+- Regras de negócio relacionadas a usuários
+
+### 📸 Módulo de Fotos (`photos/`)
+- Gestão de uploads de fotos
+- Metadados de fotos
+- Lógica de armazenamento e recuperação
+
+### 📂 Módulo de Álbuns (`albums/`)
+- Criação e gerenciamento de álbuns
+- Agrupamento de fotos
+- Compartilhamento de álbuns
+
+## 🛠️ Recursos Compartilhados
+
+### Configurações (`shared/config/`)
+- Configurações de banco de dados
+- Configurações de filas
+- Configurações do Redis
+
+### Notificações (`shared/notification/`)
+- Sistema de notificação por email
+- Jobs de notificação
+- Emissão de notificações
+
+### Utilitários (`shared/utils/`)
+- Enums
+- Exceções customizadas
+- Helpers
+- Interfaces compartilhadas
+
+## 🚀 Boas Práticas
+
+1. Baixo acoplamento entre módulos
+2. Alta coesão dentro dos módulos
+3. Reutilização de código via shared
+4. Princípios SOLID
+5. Separação clara de responsabilidades
+
+## 📦 Dependências entre Módulos
+
+- Módulos de negócio independentes
+- Recursos compartilhados acessíveis por todos
+- Comunicação via injeção de dependência
+
+## 🔒 Segurança
+
+- Guards centralizados
+- Decoradores customizados
+- Estratégias de autenticação modulares
+
+## 🧪 Testabilidade
+
+- Estrutura que facilita testes unitários
+- Mocks disponíveis
+- Testes específicos por módulo
+
+## 🔗 Próximos Passos
+
+- Implementar mais testes de integração
+- Documentação detalhada de cada módulo
+- Monitoramento de performance
+- Otimização de queries
 ```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
