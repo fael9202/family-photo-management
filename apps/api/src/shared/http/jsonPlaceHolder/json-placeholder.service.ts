@@ -14,7 +14,7 @@ export class JsonPlaceholderService {
   async getUsers() {
     const usersResponse = await lastValueFrom(
       this.httpService.get<JsonPlaceHolderUserResponse>(
-        'https://jsonplaceholder.typicode.com/users',
+        `${process.env.JSONPLACEHOLDER_API_URL}/users`,
       ),
     );
     const users = usersResponse.data;
@@ -24,7 +24,7 @@ export class JsonPlaceholderService {
   async getAlbums(userId: number) {
     const albumsResponse = await lastValueFrom(
       this.httpService.get<JsonPlaceHolderAlbumResponse>(
-        `https://jsonplaceholder.typicode.com/users/${userId}/albums`,
+        `${process.env.JSONPLACEHOLDER_API_URL}/users/${userId}/albums`,
       ),
     );
     const albums = albumsResponse.data;
@@ -34,7 +34,7 @@ export class JsonPlaceholderService {
   async getPhotos(albumId: number) {
     const photosResponse = await lastValueFrom(
       this.httpService.get<JsonPlaceHolderPhotoResponse>(
-        `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`,
+        `${process.env.JSONPLACEHOLDER_API_URL}/photos?albumId=${albumId}`,
       ),
     );
     const photos = photosResponse.data;
