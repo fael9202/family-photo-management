@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gerenciamento de Álbuns de Fotos - Frontend
 
-## Getting Started
+## 📋 Visão Geral do Projeto
 
-First, run the development server:
+Este é um aplicativo frontend em Next.js para gerenciamento de álbuns de fotos, usuários e autenticação. O projeto é construído usando tecnologias web modernas e segue as melhores práticas de desenvolvimento React e Next.js.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Tecnologias Utilizadas
+
+- **Framework**: Next.js 14
+- **Linguagem**: TypeScript
+- **Gerenciamento de Estado**: React Query
+- **Autenticação**: NextAuth
+- **Estilização**: Tailwind CSS
+- **Componentes de UI**: Shadcn/UI
+
+## ✨ Funcionalidades
+
+- Gerenciamento de usuários
+- Criação e gerenciamento de álbuns
+- Upload e organização de fotos
+- Funcionalidade de redefinição de senha
+- Design de interface responsivo
+- Renderização do lado do servidor
+- Gerenciamento de estado do lado do cliente
+
+## 📂 Estrutura do Projeto
+
+```
+frontend/
+├── app/               # Diretório do aplicativo Next.js
+│   ├── layout.tsx     # Layout principal do aplicativo
+│   ├── page.tsx       # Página inicial
+│   └── ...
+├── components/        # Componentes React reutilizáveis
+│   ├── albums/        # Componentes de álbuns
+│   ├── photos/        # Componentes de fotos
+│   ├── ui/            # Componentes Shadcn/UI
+│   └── users/         # Componentes de usuários
+├── hooks/             # Hooks personalizados do React
+├── lib/               # Funções utilitárias
+├── services/          # Funções de serviço de API
+│   ├── albums/
+│   ├── photos/
+│   └── users/
+├── utils/             # Interfaces TypeScript e arquivos utilitários
+└── providers/         # Provedores de contexto React
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Pré-requisitos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js (versão 18 ou superior)
+- npm
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Instalação
 
-## Learn More
+1. Clone o repositório
+2. Navegue até o diretório frontend
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Crie um arquivo `.env` baseado no `.env.example`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚦 Executando a Aplicação
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Modo de desenvolvimento:
+  ```bash
+  npm run dev
+  ```
 
-## Deploy on Vercel
+- Build de produção:
+  ```bash
+  npm run build
+  npm run start
+  ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📡 Integração de API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A aplicação utiliza arquivos de serviço personalizados no diretório `services/` para gerenciar:
+- Operações de usuários
+- Gerenciamento de álbuns
+- Upload e edição de fotos
+- Solicitações de autenticação
+
+## 🔐 Autenticação
+
+Utiliza NextAuth para autenticação, com lógica de autenticação personalizada no lado do servidor em `server/auth.ts`.
+
+## 🎨 Estilização
+
+- Tailwind CSS para estilização utility-first
+- Componentes de UI personalizados do Shadcn/UI
+- Design responsivo
+- Fontes personalizadas (Geist e Geist Mono)
+
+## 📊 Gerenciamento de Estado
+
+- React Query para gerenciamento de estado do servidor
+- Hooks personalizados para busca e manipulação de dados
+
+
+## 📦 Configuração de Build
+
+- Configuração do Next.js em `next.config.mjs`
+- Configuração do TypeScript em `tsconfig.json`
+- Configurações de Tailwind e PostCSS incluídas
