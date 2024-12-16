@@ -55,7 +55,8 @@ export class PopulateDatabaseSeeder implements OnModuleInit {
   }
 
   private async insertUser(user: JsonPlaceholderUser): Promise<User> {
-    const hashedPassword = await bcrypt.hash(`${user.username}`, 10);
+    const userPassword = '123456';
+    const hashedPassword = await bcrypt.hash(userPassword, 10);
     return await this.databaseService.user.create({
       data: {
         id: user.id,

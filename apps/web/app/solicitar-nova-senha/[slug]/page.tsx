@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckCircle, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { newPasswordService } from "@/services/request-new-password/new-password";
+import messages from "@/utils/messages/pt-br.json";
 
 const newPasswordSchema = z
   .object({
@@ -92,26 +93,28 @@ export default function NewPasswordForm({
               <div className="text-center animate-fade-in space-y-4">
                 <CheckCircle className="w-16 h-16 mx-auto text-green-500" />
                 <CardTitle className="text-2xl font-semibold text-green-700">
-                  Senha Alterada com Sucesso!
+                  {messages.forgotPassword.success}
                 </CardTitle>
                 <CardDescription className="text-base">
-                  Sua nova senha foi definida. Você já pode fazer login com ela.
+                  {messages.forgotPassword.successDescription}
                 </CardDescription>
                 <Link
                   href="/"
                   className="inline-flex items-center text-sm text-primary hover:underline mt-4"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Ir para o Login
+                  {messages.forgotPassword.backToLogin}
                 </Link>
               </div>
             </CardContent>
           ) : (
             <>
               <CardHeader>
-                <CardTitle className="text-2xl">Definir Nova Senha</CardTitle>
+                <CardTitle className="text-2xl">
+                  {messages.forgotPassword.title}
+                </CardTitle>
                 <CardDescription>
-                  Digite e confirme sua nova senha abaixo
+                  {messages.forgotPassword.setNewPassword}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -120,7 +123,9 @@ export default function NewPasswordForm({
                   onSubmit={handleSubmit(handleNewPassword)}
                 >
                   <div className="space-y-2">
-                    <Label htmlFor="newPassword">Nova Senha</Label>
+                    <Label htmlFor="newPassword">
+                      {messages.forgotPassword.newPassword}
+                    </Label>
                     <div className="relative">
                       <Input
                         id="password"
@@ -154,7 +159,7 @@ export default function NewPasswordForm({
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="confirmPassword">
-                      Confirmar Nova Senha
+                      {messages.forgotPassword.confirmPassword}
                     </Label>
                     <div className="relative">
                       <Input
@@ -197,7 +202,7 @@ export default function NewPasswordForm({
                 </form>
                 <div className="mt-4 text-center text-sm">
                   <Link href="/" className="text-primary hover:underline">
-                    Voltar para o Login
+                      Voltar para o Login
                   </Link>
                 </div>
               </CardContent>

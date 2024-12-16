@@ -17,6 +17,20 @@
     "passwordRequired": "Senha é obrigatória",
     "usernameRequired": "Nome de usuário é obrigatório"
   },
+  "forgotPassword": {
+    "title": "Definir Nova Senha",
+    "newPassword": "Nova Senha",
+    "confirmPassword": "Confirmar Nova Senha",
+    "description": "Digite seu email abaixo para solicitar uma nova senha",
+    "email": "Email",
+    "emailRequired": "Email é obrigatório",
+    "success": "Senha Alterada com Sucesso!",
+    "successDescription": "Sua senha foi alterada com sucesso. Você pode agora acessar sua conta com a nova senha.",
+    "backToLogin": "Ir para o Login",
+    "setNewPassword": "Definir Nova Senha",
+    "emailSent": "Email Enviado com Sucesso!",
+    "emailSentDescription": "Verifique sua caixa de entrada para prosseguir com a troca de senha."
+  },
   "albums": {
     "contact": "Contato",
     "username": "Nome de usuário",

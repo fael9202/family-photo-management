@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckCircle, ArrowLeft } from "lucide-react";
 import { requestNewPasswordService } from "@/services/request-new-password/request-new-password";
-
+import messages from "@/utils/messages/pt-br.json";
 const requestNewPasswordSchema = z.object({
   email: z.string().email(),
 });
@@ -74,18 +74,17 @@ export default function LoginForm() {
               <div className="text-center animate-fade-in space-y-4 max-w-xs mx-auto">
                 <CheckCircle className="w-16 h-16 mx-auto text-green-500" />
                 <CardTitle className="text-2xl font-semibold text-green-700">
-                  Email Enviado com Sucesso!
+                  {messages.forgotPassword.emailSent}
                 </CardTitle>
                 <CardDescription className="text-base">
-                  Verifique sua caixa de entrada para prosseguir com a troca de
-                  senha.
+                  {messages.forgotPassword.emailSentDescription}
                 </CardDescription>
                 <Link
                   href="/"
                   className="inline-flex items-center text-sm text-primary hover:underline mt-4"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Voltar para o Login
+                  {messages.forgotPassword.backToLogin}
                 </Link>
               </div>
             </CardContent>
@@ -94,8 +93,7 @@ export default function LoginForm() {
               <CardHeader>
                 <CardTitle className="text-2xl">Trocar de Senha</CardTitle>
                 <CardDescription>
-                  Digite seu nome de usuário abaixo para solicitar troca de
-                  senha
+                  {messages.forgotPassword.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -104,7 +102,9 @@ export default function LoginForm() {
                   onSubmit={handleSubmit(handleRequestNewPassword)}
                 >
                   <div className="space-y-2">
-                    <Label htmlFor="username">Nome de usuário</Label>
+                    <Label htmlFor="username">
+                      {messages.forgotPassword.email}
+                    </Label>
                     <Input
                       id="email"
                       type="email"
@@ -114,7 +114,7 @@ export default function LoginForm() {
                     />
                     {errors.email && (
                       <p className="text-sm text-red-500">
-                        Email é obrigatório
+                        {messages.forgotPassword.emailRequired}
                       </p>
                     )}
                   </div>
@@ -124,7 +124,7 @@ export default function LoginForm() {
                 </form>
                 <div className="mt-4 text-center text-sm">
                   <Link href="/" className="text-primary hover:underline">
-                    Voltar para o Login
+                    {messages.forgotPassword.backToLogin}
                   </Link>
                 </div>
               </CardContent>

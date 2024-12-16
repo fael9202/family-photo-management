@@ -127,12 +127,6 @@ export default function LoginForm(): JSX.Element {
               {loading ? "Carregando..." : "Entrar"}
             </Button>
           </form>
-          <div className="mt-4 text-center text-sm">
-            {messages.login.noAccount} {" "}
-            <Link href="" className="underline">
-              {messages.login.createAccount}
-            </Link>
-          </div>
         </CardContent>
       </Card>
     </div>
