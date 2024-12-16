@@ -2,7 +2,7 @@
 
 ## 📝 Descrição do Projeto
 
-Este é um aplicativo de gerenciamento de fotos familiares, desenvolvido para ajudar famílias a organizarem, armazenarem e compartilharem suas memórias digitais de forma segura e intuitiva.
+Este é um aplicativo de gerenciamento de fotos familiares, com autenticação, gerenciamento de usuários, álbuns e fotos.
 
 ## 🚀 Tecnologias Utilizadas
 
