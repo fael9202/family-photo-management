@@ -115,9 +115,3 @@ Env do frontend
 npm run test
 npm run test:e2e
 ```
-
-### Frontend
-```bash
-# No diretório apps/web
-npm run test
-```
